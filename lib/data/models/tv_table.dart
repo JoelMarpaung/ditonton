@@ -2,6 +2,7 @@ import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
 import 'package:equatable/equatable.dart';
 
+import '../../domain/entities/tv_detail.dart';
 import '../../domain/entities/tv.dart';
 
 class TvTable extends Equatable {
@@ -17,11 +18,11 @@ class TvTable extends Equatable {
     required this.overview,
   });
 
-  factory TvTable.fromEntity(MovieDetail movie) => TvTable(
-    id: movie.id,
-    name: movie.title,
-    posterPath: movie.posterPath,
-    overview: movie.overview,
+  factory TvTable.fromEntity(TvDetail tv) => TvTable(
+    id: tv.id,
+    name: tv.name,
+    posterPath: tv.posterPath,
+    overview: tv.overview,
   );
 
   factory TvTable.fromMap(Map<String, dynamic> map) => TvTable(
