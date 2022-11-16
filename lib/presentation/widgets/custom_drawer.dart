@@ -46,7 +46,7 @@ class CustomDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(Icons.save_alt),
-            title: Text('Watchlist Tv'),
+            title: Text('Watchlist Tv Series'),
             onTap: () {
               Navigator.pushNamed(context, WatchlistTvPage.ROUTE_NAME);
             },

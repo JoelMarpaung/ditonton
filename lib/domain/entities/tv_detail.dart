@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import 'genre.dart';
+
 class TvDetail extends Equatable {
   TvDetail({
     required this.posterPath,
@@ -8,7 +10,7 @@ class TvDetail extends Equatable {
     required this.backdropPath,
     required this.voteAverage,
     required this.overview,
-    required this.genreIds,
+    required this.genres,
     required this.originalLanguage,
     required this.voteCount,
     required this.name,
@@ -21,7 +23,7 @@ class TvDetail extends Equatable {
   String? backdropPath;
   double? voteAverage;
   String? overview;
-  List<int>? genreIds;
+  List<Genre> genres;
   String? originalLanguage;
   int? voteCount;
   String? name;
@@ -35,7 +37,7 @@ class TvDetail extends Equatable {
     backdropPath,
     voteAverage,
     overview,
-    genreIds,
+    genres,
     originalLanguage,
     voteCount,
     name,

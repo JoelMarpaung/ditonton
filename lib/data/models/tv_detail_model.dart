@@ -1,12 +1,13 @@
 import 'package:equatable/equatable.dart';
 
 import '../../domain/entities/tv_detail.dart';
+import 'genre_model.dart';
 
 class TvDetailResponse extends Equatable {
   TvDetailResponse({
     required this.originalLanguage,
     required this.backdropPath,
-    required this.genreIds,
+    required this.genres,
     required this.id,
     required this.name,
     required this.overview,
@@ -23,7 +24,7 @@ class TvDetailResponse extends Equatable {
   final String? backdropPath;
   final double voteAverage;
   final String overview;
-  final List<int> genreIds;
+  final List<GenreModel> genres;
   final String originalLanguage;
   final int voteCount;
   final String name;
@@ -32,7 +33,8 @@ class TvDetailResponse extends Equatable {
   factory TvDetailResponse.fromJson(Map<String, dynamic> json) =>
       TvDetailResponse(
         backdropPath: json["backdrop_path"],
-        genreIds: List<int>.from(json["genre_ids"].map((x) => x)),
+        genres: List<GenreModel>.from(
+            json["genres"].map((x) => GenreModel.fromJson(x))),
         id: json["id"],
         overview: json["overview"],
         popularity: json["popularity"].toDouble(),
@@ -46,7 +48,7 @@ class TvDetailResponse extends Equatable {
 
   Map<String, dynamic> toJson() => {
         "backdrop_path": backdropPath,
-        "genre_ids": List<dynamic>.from(genreIds.map((x) => x)),
+        "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
         "id": id,
         "overview": overview,
         "popularity": popularity,
@@ -66,7 +68,7 @@ class TvDetailResponse extends Equatable {
         backdropPath: this.backdropPath,
         voteAverage: this.voteAverage,
         overview: this.overview,
-        genreIds: this.genreIds,
+        genres: this.genres.map((genre) => genre.toEntity()).toList(),
         originalLanguage: this.originalLanguage,
         voteCount: this.voteCount,
         name: this.name,
@@ -81,7 +83,7 @@ class TvDetailResponse extends Equatable {
         backdropPath,
         voteAverage,
         overview,
-        genreIds,
+        genres,
         originalLanguage,
         voteCount,
         name,
