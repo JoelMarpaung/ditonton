@@ -79,8 +79,8 @@ class TvDetailNotifier extends ChangeNotifier {
   String _watchlistMessage = '';
   String get watchlistMessage => _watchlistMessage;
 
-  Future<void> addWatchlist(TvDetail Tv) async {
-    final result = await saveWatchlist.execute(Tv);
+  Future<void> addWatchlist(TvDetail tv) async {
+    final result = await saveWatchlist.execute(tv);
 
     await result.fold(
           (failure) async {
@@ -91,11 +91,11 @@ class TvDetailNotifier extends ChangeNotifier {
       },
     );
 
-    await loadWatchlistStatus(Tv.id);
+    await loadWatchlistStatus(tv.id);
   }
 
-  Future<void> removeFromWatchlist(TvDetail Tv) async {
-    final result = await removeWatchlist.execute(Tv);
+  Future<void> removeFromWatchlist(TvDetail tv) async {
+    final result = await removeWatchlist.execute(tv);
 
     await result.fold(
           (failure) async {
@@ -106,7 +106,7 @@ class TvDetailNotifier extends ChangeNotifier {
       },
     );
 
-    await loadWatchlistStatus(Tv.id);
+    await loadWatchlistStatus(tv.id);
   }
 
   Future<void> loadWatchlistStatus(int id) async {

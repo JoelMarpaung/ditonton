@@ -1,7 +1,5 @@
-import 'package:ditonton/domain/entities/movie.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../domain/entities/tv.dart';
 import '../../domain/entities/tv_detail.dart';
 
 class TvDetailResponse extends Equatable {

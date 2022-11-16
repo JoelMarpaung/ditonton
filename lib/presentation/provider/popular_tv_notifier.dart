@@ -11,8 +11,8 @@ class PopularTvsNotifier extends ChangeNotifier {
   RequestState _state = RequestState.Empty;
   RequestState get state => _state;
 
-  List<Tv> _Tvs = [];
-  List<Tv> get Tvs => _Tvs;
+  List<Tv> _tvs = [];
+  List<Tv> get tvs => _tvs;
 
   String _message = '';
   String get message => _message;
@@ -29,8 +29,8 @@ class PopularTvsNotifier extends ChangeNotifier {
         _state = RequestState.Error;
         notifyListeners();
       },
-          (TvsData) {
-        _Tvs = TvsData;
+          (tvsData) {
+        _tvs = tvsData;
         _state = RequestState.Loaded;
         notifyListeners();
       },
