@@ -33,7 +33,7 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
     return Scaffold(
       drawer: CustomDrawer(),
       appBar: AppBar(
-        title: Text('Ditonton'),
+        title: Text('Ditonton Movies'),
         actions: [
           IconButton(
             onPressed: () {
