@@ -43,12 +43,12 @@ class TvListNotifier extends ChangeNotifier {
 
     final result = await getNowPlayingTvs.execute();
     result.fold(
-          (failure) {
+      (failure) {
         _nowPlayingState = RequestState.Error;
         _message = failure.message;
         notifyListeners();
       },
-          (tvsData) {
+      (tvsData) {
         _nowPlayingState = RequestState.Loaded;
         _nowPlayingTvs = tvsData;
         notifyListeners();
@@ -62,12 +62,12 @@ class TvListNotifier extends ChangeNotifier {
 
     final result = await getPopularTvs.execute();
     result.fold(
-          (failure) {
+      (failure) {
         _popularTvsState = RequestState.Error;
         _message = failure.message;
         notifyListeners();
       },
-          (tvsData) {
+      (tvsData) {
         _popularTvsState = RequestState.Loaded;
         _popularTvs = tvsData;
         notifyListeners();
@@ -81,12 +81,12 @@ class TvListNotifier extends ChangeNotifier {
 
     final result = await getTopRatedTvs.execute();
     result.fold(
-          (failure) {
+      (failure) {
         _topRatedTvsState = RequestState.Error;
         _message = failure.message;
         notifyListeners();
       },
-          (tvsData) {
+      (tvsData) {
         _topRatedTvsState = RequestState.Loaded;
         _topRatedTvs = tvsData;
         notifyListeners();

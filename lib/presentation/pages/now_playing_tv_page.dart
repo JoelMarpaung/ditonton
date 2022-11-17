@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../common/state_enum.dart';
-import '../provider/popular_tv_notifier.dart';
 import '../widgets/tv_card_list.dart';
 
 class NowPlayingTvPage extends StatefulWidget {
@@ -22,6 +21,7 @@ class _NowPlayingTvPageState extends State<NowPlayingTvPage> {
         Provider.of<NowPlayingTvsNotifier>(context, listen: false)
             .fetchNowPlayingTvs());
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

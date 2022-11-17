@@ -1,8 +1,8 @@
 import 'package:equatable/equatable.dart';
 
 class Tv extends Equatable {
-  Tv({
-      required this.posterPath,
+  Tv(
+      {required this.posterPath,
       required this.popularity,
       required this.id,
       required this.backdropPath,
@@ -12,8 +12,7 @@ class Tv extends Equatable {
       required this.originalLanguage,
       required this.voteCount,
       required this.name,
-      required this.originalName
-  });
+      required this.originalName});
 
   Tv.watchlist({
     required this.id,

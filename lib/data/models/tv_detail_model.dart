@@ -1,3 +1,4 @@
+import 'package:ditonton/data/models/season_model.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../domain/entities/tv_detail.dart';
@@ -8,6 +9,7 @@ class TvDetailResponse extends Equatable {
     required this.originalLanguage,
     required this.backdropPath,
     required this.genres,
+    required this.seasons,
     required this.id,
     required this.name,
     required this.overview,
@@ -25,6 +27,7 @@ class TvDetailResponse extends Equatable {
   final double voteAverage;
   final String overview;
   final List<GenreModel> genres;
+  final List<SeasonModel> seasons;
   final String originalLanguage;
   final int voteCount;
   final String name;
@@ -35,6 +38,8 @@ class TvDetailResponse extends Equatable {
         backdropPath: json["backdrop_path"],
         genres: List<GenreModel>.from(
             json["genres"].map((x) => GenreModel.fromJson(x))),
+        seasons: List<SeasonModel>.from(
+            json["seasons"].map((x) => SeasonModel.fromJson(x))),
         id: json["id"],
         overview: json["overview"],
         popularity: json["popularity"].toDouble(),
@@ -49,6 +54,7 @@ class TvDetailResponse extends Equatable {
   Map<String, dynamic> toJson() => {
         "backdrop_path": backdropPath,
         "genres": List<dynamic>.from(genres.map((x) => x.toJson())),
+        "seasons": List<dynamic>.from(seasons.map((x) => x.toJson())),
         "id": id,
         "overview": overview,
         "popularity": popularity,
@@ -69,6 +75,7 @@ class TvDetailResponse extends Equatable {
         voteAverage: this.voteAverage,
         overview: this.overview,
         genres: this.genres.map((genre) => genre.toEntity()).toList(),
+        seasons: this.seasons.map((season) => season.toEntity()).toList(),
         originalLanguage: this.originalLanguage,
         voteCount: this.voteCount,
         name: this.name,
@@ -84,6 +91,7 @@ class TvDetailResponse extends Equatable {
         voteAverage,
         overview,
         genres,
+        seasons,
         originalLanguage,
         voteCount,
         name,

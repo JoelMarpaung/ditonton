@@ -24,12 +24,12 @@ class TopRatedTvsNotifier extends ChangeNotifier {
     final result = await getTopRatedTvs.execute();
 
     result.fold(
-          (failure) {
+      (failure) {
         _message = failure.message;
         _state = RequestState.Error;
         notifyListeners();
       },
-          (tvsData) {
+      (tvsData) {
         _tvs = tvsData;
         _state = RequestState.Loaded;
         notifyListeners();

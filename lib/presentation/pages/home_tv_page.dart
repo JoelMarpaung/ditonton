@@ -25,12 +25,12 @@ class _HomeTvPageState extends State<HomeTvPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(
-            () => Provider.of<TvListNotifier>(context, listen: false)
-          ..fetchNowPlayingTvs()
-          ..fetchPopularTvs()
-          ..fetchTopRatedTvs());
+    Future.microtask(() => Provider.of<TvListNotifier>(context, listen: false)
+      ..fetchNowPlayingTvs()
+      ..fetchPopularTvs()
+      ..fetchTopRatedTvs());
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,6 +109,7 @@ class _HomeTvPageState extends State<HomeTvPage> {
       ),
     );
   }
+
   Row _buildSubHeading({required String title, required Function() onTap}) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -143,7 +144,7 @@ class TvList extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
-          final Tv = tvs[index];
+          final tv = tvs[index];
           return Container(
             padding: const EdgeInsets.all(8),
             child: InkWell(
@@ -151,13 +152,13 @@ class TvList extends StatelessWidget {
                 Navigator.pushNamed(
                   context,
                   TvDetailPage.ROUTE_NAME,
-                  arguments: Tv.id,
+                  arguments: tv.id,
                 );
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${Tv.posterPath}',
+                  imageUrl: '$BASE_IMAGE_URL${tv.posterPath}',
                   placeholder: (context, url) => Center(
                     child: CircularProgressIndicator(),
                   ),

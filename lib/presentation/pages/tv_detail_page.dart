@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ditonton/presentation/widgets/season_card_list.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +32,7 @@ class _TvDetailPageState extends State<TvDetailPage> {
           .loadWatchlistStatus(widget.id);
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,25 +110,23 @@ class DetailContent extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () async {
                                 if (!isAddedWatchlist) {
-                                  await Provider.of<TvDetailNotifier>(
-                                      context,
-                                      listen: false)
+                                  await Provider.of<TvDetailNotifier>(context,
+                                          listen: false)
                                       .addWatchlist(tv);
                                 } else {
-                                  await Provider.of<TvDetailNotifier>(
-                                      context,
-                                      listen: false)
+                                  await Provider.of<TvDetailNotifier>(context,
+                                          listen: false)
                                       .removeFromWatchlist(tv);
                                 }
 
-                                final message =
-                                    Provider.of<TvDetailNotifier>(context,
+                                final message = Provider.of<TvDetailNotifier>(
+                                        context,
                                         listen: false)
-                                        .watchlistMessage;
+                                    .watchlistMessage;
 
                                 if (message ==
-                                    TvDetailNotifier
-                                        .watchlistAddSuccessMessage ||
+                                        TvDetailNotifier
+                                            .watchlistAddSuccessMessage ||
                                     message ==
                                         TvDetailNotifier
                                             .watchlistRemoveSuccessMessage) {
@@ -182,6 +182,19 @@ class DetailContent extends StatelessWidget {
                             ),
                             SizedBox(height: 16),
                             Text(
+                              'Seasons',
+                              style: kHeading6,
+                            ),
+                            ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: tv.seasons.length,
+                                itemBuilder: (context, index) {
+                                  return SeasonCard(
+                                      tv.seasons[index], tv.posterPath!, tv.id);
+                                }),
+                            SizedBox(height: 16),
+                            Text(
                               'Recommendations',
                               style: kHeading6,
                             ),
@@ -219,15 +232,15 @@ class DetailContent extends StatelessWidget {
                                               ),
                                               child: CachedNetworkImage(
                                                 imageUrl:
-                                                'https://image.tmdb.org/t/p/w500${tv.posterPath}',
+                                                    'https://image.tmdb.org/t/p/w500${tv.posterPath}',
                                                 placeholder: (context, url) =>
                                                     Center(
-                                                      child:
+                                                  child:
                                                       CircularProgressIndicator(),
-                                                    ),
+                                                ),
                                                 errorWidget:
                                                     (context, url, error) =>
-                                                    Icon(Icons.error),
+                                                        Icon(Icons.error),
                                               ),
                                             ),
                                           ),
@@ -290,16 +303,5 @@ class DetailContent extends StatelessWidget {
     }
 
     return result.substring(0, result.length - 2);
-  }
-
-  String _showDuration(int runtime) {
-    final int hours = runtime ~/ 60;
-    final int minutes = runtime % 60;
-
-    if (hours > 0) {
-      return '${hours}h ${minutes}m';
-    } else {
-      return '${minutes}m';
-    }
   }
 }

@@ -9,6 +9,7 @@ import 'package:ditonton/presentation/pages/popular_movies_page.dart';
 import 'package:ditonton/presentation/pages/popular_tv_page.dart';
 import 'package:ditonton/presentation/pages/search_page.dart';
 import 'package:ditonton/presentation/pages/search_tv_page.dart';
+import 'package:ditonton/presentation/pages/season_detail_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_movies_page.dart';
 import 'package:ditonton/presentation/pages/top_rated_tv_page.dart';
 import 'package:ditonton/presentation/pages/tv_detail_page.dart';
@@ -20,6 +21,7 @@ import 'package:ditonton/presentation/provider/movie_search_notifier.dart';
 import 'package:ditonton/presentation/provider/now_playing_tv_notifier.dart';
 import 'package:ditonton/presentation/provider/popular_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/popular_tv_notifier.dart';
+import 'package:ditonton/presentation/provider/season_detail_notifier.dart';
 import 'package:ditonton/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:ditonton/presentation/provider/top_rated_tv_notifier.dart';
 import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
@@ -60,7 +62,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistMovieNotifier>(),
         ),
-
         ChangeNotifierProvider(
           create: (_) => di.locator<TvListNotifier>(),
         ),
@@ -81,6 +82,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => di.locator<WatchlistTvNotifier>(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => di.locator<SeasonDetailNotifier>(),
         ),
       ],
       child: MaterialApp(
@@ -111,7 +115,7 @@ class MyApp extends StatelessWidget {
               return CupertinoPageRoute(builder: (_) => SearchPage());
             case WatchlistMoviesPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
-              //Tv Routes
+            //Tv Routes
             case HomeTvPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => HomeTvPage());
             case NowPlayingTvPage.ROUTE_NAME:
@@ -130,6 +134,17 @@ class MyApp extends StatelessWidget {
               return MaterialPageRoute(builder: (_) => SearchTvPage());
             case WatchlistTvPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => WatchlistTvPage());
+
+            case SeasonDetailPage.ROUTE_NAME:
+              final args = settings.arguments as ScreenArguments;
+              return MaterialPageRoute(
+                builder: (_) => SeasonDetailPage(
+                  id: args.id,
+                  seasonNumber: args.seasonNumber,
+                  posterPath: args.posterPath,
+                ),
+                settings: settings,
+              );
 
             case AboutPage.ROUTE_NAME:
               return MaterialPageRoute(builder: (_) => AboutPage());

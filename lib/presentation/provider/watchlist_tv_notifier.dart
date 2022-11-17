@@ -23,12 +23,12 @@ class WatchlistTvNotifier extends ChangeNotifier {
 
     final result = await getWatchlistTvs.execute();
     result.fold(
-          (failure) {
+      (failure) {
         _watchlistState = RequestState.Error;
         _message = failure.message;
         notifyListeners();
       },
-          (tvsData) {
+      (tvsData) {
         _watchlistState = RequestState.Loaded;
         _watchlistTvs = tvsData;
         notifyListeners();
