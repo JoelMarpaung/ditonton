@@ -1,0 +1,25 @@
+{
+  "_id": "5256c89f19c2956ff6046d47",
+  "air_date": "2011-04-17",
+  "episodes": [
+    {
+      "air_date": "2011-04-17",
+      "episode_number": 1,
+      "crew": [],
+      "guest_stars": [],
+      "id": 63056,
+      "name": "Winter Is Coming",
+      "overview": "overview",
+      "production_code": "101",
+      "season_number": 1,
+      "still_path": "/path.jpg",
+      "vote_average": 7.7,
+      "vote_count": 179
+    }
+  ],
+  "name": "Season 1",
+  "overview": "overview",
+  "id": 3624,
+  "poster_path": "/path.jpg",
+  "season_number": 1
+}

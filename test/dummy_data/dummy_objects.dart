@@ -1,7 +1,11 @@
 import 'package:ditonton/data/models/movie_table.dart';
+import 'package:ditonton/data/models/tv_table.dart';
 import 'package:ditonton/domain/entities/genre.dart';
 import 'package:ditonton/domain/entities/movie.dart';
 import 'package:ditonton/domain/entities/movie_detail.dart';
+import 'package:ditonton/domain/entities/season_detail.dart';
+import 'package:ditonton/domain/entities/tv.dart';
+import 'package:ditonton/domain/entities/tv_detail.dart';
 
 final testMovie = Movie(
   adult: false,
@@ -20,7 +24,22 @@ final testMovie = Movie(
   voteCount: 13507,
 );
 
+final testTv = Tv(
+    posterPath: '',
+    popularity: 0,
+    id: 0,
+    backdropPath: '',
+    voteAverage: 0,
+    overview: '',
+    genreIds: [],
+    originalLanguage: '',
+    voteCount: 0,
+    name: '',
+    originalName: '');
+
 final testMovieList = [testMovie];
+
+final testTvList = [testTv];
 
 final testMovieDetail = MovieDetail(
   adult: false,
@@ -37,12 +56,35 @@ final testMovieDetail = MovieDetail(
   voteCount: 1,
 );
 
+final testTvDetail = TvDetail(
+    posterPath: '',
+    popularity: 0,
+    id: 0,
+    backdropPath: '',
+    voteAverage: 0,
+    overview: '',
+    originalLanguage: '',
+    voteCount: 0,
+    name: '',
+    originalName: '',
+    genres: [],
+    seasons: []);
+
+final testSeasonDetail = SeasonDetail(
+    posterPath: '',
+    id: 0,
+    overview: '',
+    name: '', seasonNumber: 1, episodes: []);
+
 final testWatchlistMovie = Movie.watchlist(
   id: 1,
   title: 'title',
   posterPath: 'posterPath',
   overview: 'overview',
 );
+
+final testWatchListTv =
+    Tv.watchlist(id: 0, overview: '', posterPath: '', name: '');
 
 final testMovieTable = MovieTable(
   id: 1,
@@ -51,9 +93,23 @@ final testMovieTable = MovieTable(
   overview: 'overview',
 );
 
+final testTvTable = TvTable(
+  id: 0,
+  name: '',
+  posterPath: '',
+  overview: '',
+);
+
 final testMovieMap = {
   'id': 1,
   'overview': 'overview',
   'posterPath': 'posterPath',
   'title': 'title',
+};
+
+final testTvMap = {
+  'id': 0,
+  'overview': '',
+  'posterPath': '',
+  'name': '',
 };
