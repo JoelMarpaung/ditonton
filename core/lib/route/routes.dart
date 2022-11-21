@@ -1,0 +1,15 @@
+const String aboutPage = '/about';
+const String homeMoviePage = '/home';
+const String homeTvPage = '/tv';
+const String movieDetailPage = '/detail';
+const String nowPlayingTvPage = '/playing-tv';
+const String popularMoviePage = '/popular-movie';
+const String popularTvPage = '/popular-tv';
+const String searchPage = '/search';
+const String searchTvPage = '/search-tv';
+const String seasonDetailPage = '/detail-season';
+const String topRatedMoviePage = '/top-rated-movie';
+const String topRatedTvPage = '/top-rated-tv';
+const String tvDetailPage = '/detail-tv';
+const String watchlistMoviePage = '/watchlist-movie';
+const String watchlistTvPage = '/watchlist-tv';

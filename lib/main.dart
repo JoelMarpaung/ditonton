@@ -1,6 +1,4 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/utils.dart';
-import 'package:ditonton/presentation/pages/about_page.dart';
+import 'package:about/about_page.dart';
 import 'package:ditonton/presentation/pages/home_tv_page.dart';
 import 'package:ditonton/presentation/pages/movie_detail_page.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
@@ -33,6 +31,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
+
+import 'package:core/core.dart';
 
 void main() {
   di.init();
@@ -146,7 +146,7 @@ class MyApp extends StatelessWidget {
                 settings: settings,
               );
 
-            case AboutPage.ROUTE_NAME:
+            case aboutPage:
               return MaterialPageRoute(builder: (_) => AboutPage());
             default:
               return MaterialPageRoute(builder: (_) {
