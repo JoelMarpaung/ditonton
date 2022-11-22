@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/common/constants.dart';
+import 'package:core/core.dart';
 import 'package:movie/domain/entities/movie.dart';
 import 'package:movie/presentation/pages/movie_detail_page.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class MovieCard extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(
             context,
-            MovieDetailPage.ROUTE_NAME,
+            movieDetailPage,
             arguments: movie.id,
           );
         },

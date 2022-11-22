@@ -26,13 +26,13 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   @override
   void initState() {
     super.initState();
+    context.read<MovieNowPlayingBloc>().add(OnFetchMovieNowPlaying());
+    context.read<MoviePopularBloc>().add(OnFetchMoviePopular());
+    context.read<MovieTopRatedBloc>().add(OnFetchMovieTopRated());
   }
 
   @override
   Widget build(BuildContext context) {
-    context.read<MovieNowPlayingBloc>().add(OnFetchMovieNowPlaying());
-    context.read<MoviePopularBloc>().add(OnFetchMoviePopular());
-    context.read<MovieTopRatedBloc>().add(OnFetchMovieTopRated());
     return Scaffold(
       drawer: const CustomDrawer(),
       appBar: AppBar(
