@@ -10,6 +10,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  about:
+    path: ../about
+  movie:
+    path: ../movie
+
   google_fonts: ^3.0.1
   equatable: ^2.0.2
 

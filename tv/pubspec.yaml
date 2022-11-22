@@ -11,6 +11,19 @@ dependencies:
   flutter:
     sdk: flutter
 
+  core:
+    path: ../core
+
+  http: ^0.13.3
+  provider: ^6.0.3
+  dartz: ^0.10.0-nullsafety.2
+  equatable: ^2.0.2
+  flutter_rating_bar: ^4.0.0
+  cached_network_image: ^3.0.0
+  get_it: ^7.1.3
+  sqflite: ^2.0.0+3
+  path_provider: ^2.0.2
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

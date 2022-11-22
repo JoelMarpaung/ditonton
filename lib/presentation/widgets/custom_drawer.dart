@@ -1,3 +1,4 @@
+import 'package:core/route/routes.dart';
 import 'package:ditonton/presentation/pages/home_movie_page.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +26,7 @@ class CustomDrawer extends StatelessWidget {
             leading: Icon(Icons.movie),
             title: Text('Movies'),
             onTap: () {
-              Navigator.pushNamed(context, HomeMoviePage.ROUTE_NAME);
+              Navigator.pushNamed(context, homeMoviePage);
               //Navigator.pop(context);
             },
           ),
@@ -33,14 +34,14 @@ class CustomDrawer extends StatelessWidget {
             leading: Icon(Icons.save_alt),
             title: Text('Watchlist Movie'),
             onTap: () {
-              Navigator.pushNamed(context, WatchlistMoviesPage.ROUTE_NAME);
+              Navigator.pushNamed(context, watchlistMoviePage);
             },
           ),
           ListTile(
             leading: Icon(Icons.tv),
             title: Text('Tv Series'),
             onTap: () {
-              Navigator.pushNamed(context, HomeTvPage.ROUTE_NAME);
+              Navigator.pushNamed(context, homeTvPage);
               //Navigator.pop(context);
             },
           ),
@@ -48,12 +49,12 @@ class CustomDrawer extends StatelessWidget {
             leading: Icon(Icons.save_alt),
             title: Text('Watchlist Tv Series'),
             onTap: () {
-              Navigator.pushNamed(context, WatchlistTvPage.ROUTE_NAME);
+              Navigator.pushNamed(context, watchlistTvPage);
             },
           ),
           ListTile(
             onTap: () {
-              Navigator.pushNamed(context, AboutPage.ROUTE_NAME);
+              Navigator.pushNamed(context, aboutPage);
             },
             leading: Icon(Icons.info_outline),
             title: Text('About'),
