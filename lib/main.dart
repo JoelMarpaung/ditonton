@@ -17,6 +17,13 @@ import 'package:movie/presentation/pages/popular_movies_page.dart';
 import 'package:movie/presentation/pages/search_page.dart';
 import 'package:movie/presentation/pages/top_rated_movies_page.dart';
 import 'package:movie/presentation/pages/watchlist_movies_page.dart';
+import 'package:tv/presentation/bloc/tv_detail_bloc/tv_detail_bloc.dart';
+import 'package:tv/presentation/bloc/tv_now_playing_bloc/tv_now_playing_bloc.dart';
+import 'package:tv/presentation/bloc/tv_popular_bloc/tv_popular_bloc.dart';
+import 'package:tv/presentation/bloc/tv_search_bloc/tv_search_bloc.dart';
+import 'package:tv/presentation/bloc/tv_top_rated_bloc/tv_top_rated_bloc.dart';
+import 'package:tv/presentation/bloc/tv_watchlist_bloc/tv_watchlist_bloc.dart';
+import 'package:tv/presentation/bloc/season_detail_bloc/season_detail_bloc.dart';
 
 import 'package:tv/presentation/pages/home_tv_page.dart';
 import 'package:tv/presentation/pages/now_playing_tv_page.dart';
@@ -66,6 +73,29 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (_) => di.locator<MovieWatchlistBloc>(),
         ),
+
+        BlocProvider(
+          create: (_) => di.locator<TvSearchBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvNowPlayingBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvPopularBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvTopRatedBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvDetailBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvWatchlistBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<SeasonDetailBloc>(),
+        ),
+
         ChangeNotifierProvider(
           create: (_) => di.locator<TvListNotifier>(),
         ),
@@ -140,7 +170,7 @@ class MyApp extends StatelessWidget {
             case watchlistTvPage:
               return MaterialPageRoute(builder: (_) => WatchlistTvPage());
 
-            case searchTvPage:
+            case seasonDetailPage:
               final args = settings.arguments as ScreenArguments;
               return MaterialPageRoute(
                 builder: (_) => SeasonDetailPage(

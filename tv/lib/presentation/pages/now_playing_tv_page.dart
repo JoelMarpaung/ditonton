@@ -1,8 +1,10 @@
-import 'package:tv/presentation/provider/now_playing_tv_notifier.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:core/common/state_enum.dart';
+import '../bloc/tv_now_playing_bloc/tv_now_playing_bloc.dart';
+import '../bloc/tv_now_playing_bloc/tv_now_playing_event.dart';
+import '../bloc/tv_now_playing_bloc/tv_now_playing_state.dart';
 import '../widgets/tv_card_list.dart';
 
 class NowPlayingTvPage extends StatefulWidget {
@@ -17,9 +19,7 @@ class _NowPlayingTvPageState extends State<NowPlayingTvPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<NowPlayingTvsNotifier>(context, listen: false)
-            .fetchNowPlayingTvs());
+    context.read<TvNowPlayingBloc>().add(OnFetchTvNowPlaying());
   }
 
   @override
@@ -30,25 +30,28 @@ class _NowPlayingTvPageState extends State<NowPlayingTvPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<NowPlayingTvsNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
-              return Center(
+        child: BlocBuilder<TvNowPlayingBloc, TvNowPlayingState>(
+          builder: (context, state) {
+            if (state is NowPlayingLoading) {
+              return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.state == RequestState.Loaded) {
+            } else if (state is NowPlayingHasData) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final tv = data.tvs[index];
-                  return TvCard(tv);
+                  final Tv = state.result[index];
+                  return TvCard(Tv);
                 },
-                itemCount: data.tvs.length,
+                itemCount: state.result.length,
+              );
+            } else if (state is NowPlayingError) {
+              return Expanded(
+                child: Center(
+                  child: Text(state.message),
+                ),
               );
             } else {
-              return Center(
-                key: Key('error_message'),
-                child: Text(data.message),
-              );
+              return const Text('Failed');
             }
           },
         ),

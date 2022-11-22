@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:core/route/routes.dart';
 import 'package:flutter/material.dart';
 
 import 'package:core/common/constants.dart';
@@ -20,7 +21,7 @@ class SeasonCard extends StatelessWidget {
         onTap: () {
           Navigator.pushNamed(
             context,
-            SeasonDetailPage.ROUTE_NAME,
+            seasonDetailPage,
             arguments: ScreenArguments(id, season.seasonNumber, posterPath),
           );
           // Navigator.push(

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import 'package:core/common/state_enum.dart';
+import '../bloc/tv_popular_bloc/tv_popular_event.dart';
+import '../bloc/tv_popular_bloc/tv_popular_state.dart';
+import '../bloc/tv_popular_bloc/tv_popular_bloc.dart';
 import '../provider/popular_tv_notifier.dart';
 import '../widgets/tv_card_list.dart';
 
@@ -17,9 +21,7 @@ class _PopularTvPageState extends State<PopularTvPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<PopularTvsNotifier>(context, listen: false)
-            .fetchPopularTvs());
+    context.read<TvPopularBloc>().add(OnFetchTvPopular());
   }
 
   @override
@@ -30,25 +32,28 @@ class _PopularTvPageState extends State<PopularTvPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<PopularTvsNotifier>(
-          builder: (context, data, child) {
-            if (data.state == RequestState.Loading) {
-              return Center(
+        child: BlocBuilder<TvPopularBloc, TvPopularState>(
+          builder: (context, state) {
+            if (state is PopularLoading) {
+              return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.state == RequestState.Loaded) {
+            } else if (state is PopularHasData) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final tv = data.tvs[index];
-                  return TvCard(tv);
+                  final Tv = state.result[index];
+                  return TvCard(Tv);
                 },
-                itemCount: data.tvs.length,
+                itemCount: state.result.length,
+              );
+            } else if (state is PopularError) {
+              return Expanded(
+                child: Center(
+                  child: Text(state.message),
+                ),
               );
             } else {
-              return Center(
-                key: Key('error_message'),
-                child: Text(data.message),
-              );
+              return const Text('Failed');
             }
           },
         ),

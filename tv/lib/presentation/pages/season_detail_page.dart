@@ -1,10 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import 'package:core/common/constants.dart';
 import 'package:core/common/state_enum.dart';
 import '../../domain/entities/season_detail.dart';
+import '../bloc/season_detail_bloc/season_detail_state.dart';
+import '../bloc/season_detail_bloc/season_detail_event.dart';
+import '../bloc/season_detail_bloc/season_detail_bloc.dart';
 import '../provider/season_detail_notifier.dart';
 import '../widgets/episode_card_list.dart';
 
@@ -29,28 +33,31 @@ class _SeasonDetailPageState extends State<SeasonDetailPage> {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() {
-      Provider.of<SeasonDetailNotifier>(context, listen: false)
-          .fetchSeasonDetail(widget.id, widget.seasonNumber);
-    });
+    context.read<SeasonDetailBloc>().add(OnFetchSeasonDetail(widget.id, widget.seasonNumber));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer<SeasonDetailNotifier>(
-        builder: (context, provider, child) {
-          if (provider.seasonState == RequestState.Loading) {
-            return Center(
+      body: BlocBuilder<SeasonDetailBloc, SeasonDetailState>(
+        builder: (context, state) {
+          if (state is DetailLoading) {
+            return const Center(
               child: CircularProgressIndicator(),
             );
-          } else if (provider.seasonState == RequestState.Loaded) {
-            final season = provider.season;
+          } else if (state is DetailHasData) {
+            final season = state.result;
             return SafeArea(
               child: DetailContent(season, widget.posterPath),
             );
+          } else if (state is DetailError) {
+            return Expanded(
+              child: Center(
+                child: Text(state.message),
+              ),
+            );
           } else {
-            return Text(provider.message);
+            return const Text('Failed');
           }
         },
       ),

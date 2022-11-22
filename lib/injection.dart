@@ -20,6 +20,13 @@ import 'package:movie/domain/usecases/get_watchlist_status.dart';
 import 'package:movie/domain/usecases/remove_watchlist.dart';
 import 'package:movie/domain/usecases/save_watchlist.dart';
 import 'package:movie/domain/usecases/search_movies.dart';
+import 'package:tv/presentation/bloc/season_detail_bloc/season_detail_bloc.dart';
+import 'package:tv/presentation/bloc/tv_detail_bloc/tv_detail_bloc.dart';
+import 'package:tv/presentation/bloc/tv_now_playing_bloc/tv_now_playing_bloc.dart';
+import 'package:tv/presentation/bloc/tv_popular_bloc/tv_popular_bloc.dart';
+import 'package:tv/presentation/bloc/tv_search_bloc/tv_search_bloc.dart';
+import 'package:tv/presentation/bloc/tv_top_rated_bloc/tv_top_rated_bloc.dart';
+import 'package:tv/presentation/bloc/tv_watchlist_bloc/tv_watchlist_bloc.dart';
 import 'package:tv/presentation/provider/now_playing_tv_notifier.dart';
 import 'package:tv/presentation/provider/popular_tv_notifier.dart';
 import 'package:tv/presentation/provider/season_detail_notifier.dart';
@@ -87,6 +94,54 @@ void init() {
       locator(),
       locator(),
       locator(),
+      locator(),
+    ),
+  );
+
+  //bloc tv
+  locator.registerFactory(
+        () => TvSearchBloc(
+      locator(),
+    ),
+  );
+
+  locator.registerFactory(
+        () => TvNowPlayingBloc(
+      locator(),
+    ),
+  );
+
+  locator.registerFactory(
+        () => TvPopularBloc(
+      locator(),
+    ),
+  );
+
+  locator.registerFactory(
+        () => TvTopRatedBloc(
+      locator(),
+    ),
+  );
+
+  locator.registerFactory(
+        () => TvDetailBloc(
+      locator(),
+      locator(),
+      locator(),
+    ),
+  );
+
+  locator.registerFactory(
+        () => TvWatchlistBloc(
+      locator(),
+      locator(),
+      locator(),
+      locator(),
+    ),
+  );
+
+  locator.registerFactory(
+        () => SeasonDetailBloc(
       locator(),
     ),
   );

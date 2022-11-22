@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import 'package:core/common/state_enum.dart';
 import 'package:core/common/utils.dart';
+import '../bloc/tv_watchlist_bloc/tv_watchlist_state.dart';
+import '../bloc/tv_watchlist_bloc/tv_watchlist_event.dart';
+import '../bloc/tv_watchlist_bloc/tv_watchlist_bloc.dart';
 import '../provider/watchlist_tv_notifier.dart';
 import '../widgets/tv_card_list.dart';
 
@@ -18,9 +22,7 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
   @override
   void initState() {
     super.initState();
-    Future.microtask(() =>
-        Provider.of<WatchlistTvNotifier>(context, listen: false)
-            .fetchWatchlistTvs());
+    context.read<TvWatchlistBloc>().add(OnFetchTvWatchlist());
   }
 
   @override
@@ -30,8 +32,7 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
   }
 
   void didPopNext() {
-    Provider.of<WatchlistTvNotifier>(context, listen: false)
-        .fetchWatchlistTvs();
+    context.read<TvWatchlistBloc>().add(OnFetchTvWatchlist());
   }
 
   @override
@@ -42,25 +43,28 @@ class _WatchlistTvPageState extends State<WatchlistTvPage> with RouteAware {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Consumer<WatchlistTvNotifier>(
-          builder: (context, data, child) {
-            if (data.watchlistState == RequestState.Loading) {
-              return Center(
+        child: BlocBuilder<TvWatchlistBloc, TvWatchlistState>(
+          builder: (context, state) {
+            if (state is WatchlistLoading) {
+              return const Center(
                 child: CircularProgressIndicator(),
               );
-            } else if (data.watchlistState == RequestState.Loaded) {
+            } else if (state is WatchlistHasData) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final tv = data.watchlistTvs[index];
-                  return TvCard(tv);
+                  final Tv = state.result[index];
+                  return TvCard(Tv);
                 },
-                itemCount: data.watchlistTvs.length,
+                itemCount: state.result.length,
+              );
+            } else if (state is WatchlistError) {
+              return Expanded(
+                child: Center(
+                  child: Text(state.message),
+                ),
               );
             } else {
-              return Center(
-                key: Key('error_message'),
-                child: Text(data.message),
-              );
+              return const Text('Failed');
             }
           },
         ),
