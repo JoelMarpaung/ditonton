@@ -1,5 +1,5 @@
 import 'package:core/common/exception.dart';
-import 'package:tv/data/datasources/db/database_helper.dart';
+import 'package:core/db/database_helper.dart';
 
 import '../models/tv_table.dart';
 

@@ -17,22 +17,22 @@ import 'package:movie/presentation/provider/popular_movies_notifier.dart';
 import 'package:movie/presentation/provider/top_rated_movies_notifier.dart';
 import 'package:movie/presentation/provider/watchlist_movie_notifier.dart';
 
-import 'package:ditonton/presentation/pages/home_tv_page.dart';
-import 'package:ditonton/presentation/pages/now_playing_tv_page.dart';
-import 'package:ditonton/presentation/pages/popular_tv_page.dart';
-import 'package:ditonton/presentation/pages/search_tv_page.dart';
-import 'package:ditonton/presentation/pages/season_detail_page.dart';
-import 'package:ditonton/presentation/pages/top_rated_tv_page.dart';
-import 'package:ditonton/presentation/pages/tv_detail_page.dart';
-import 'package:ditonton/presentation/pages/watchlist_tv_page.dart';
-import 'package:ditonton/presentation/provider/now_playing_tv_notifier.dart';
-import 'package:ditonton/presentation/provider/popular_tv_notifier.dart';
-import 'package:ditonton/presentation/provider/season_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/top_rated_tv_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_list_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_search_notifier.dart';
-import 'package:ditonton/presentation/provider/watchlist_tv_notifier.dart';
+import 'package:tv/presentation/pages/home_tv_page.dart';
+import 'package:tv/presentation/pages/now_playing_tv_page.dart';
+import 'package:tv/presentation/pages/popular_tv_page.dart';
+import 'package:tv/presentation/pages/search_tv_page.dart';
+import 'package:tv/presentation/pages/season_detail_page.dart';
+import 'package:tv/presentation/pages/top_rated_tv_page.dart';
+import 'package:tv/presentation/pages/tv_detail_page.dart';
+import 'package:tv/presentation/pages/watchlist_tv_page.dart';
+import 'package:tv/presentation/provider/now_playing_tv_notifier.dart';
+import 'package:tv/presentation/provider/popular_tv_notifier.dart';
+import 'package:tv/presentation/provider/season_detail_notifier.dart';
+import 'package:tv/presentation/provider/top_rated_tv_notifier.dart';
+import 'package:tv/presentation/provider/tv_detail_notifier.dart';
+import 'package:tv/presentation/provider/tv_list_notifier.dart';
+import 'package:tv/presentation/provider/tv_search_notifier.dart';
+import 'package:tv/presentation/provider/watchlist_tv_notifier.dart';
 
 import 'package:core/core.dart';
 import 'package:about/about_page.dart';
@@ -119,26 +119,26 @@ class MyApp extends StatelessWidget {
             case watchlistMoviePage:
               return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
             //Tv Routes
-            case HomeTvPage.ROUTE_NAME:
+            case homeTvPage:
               return MaterialPageRoute(builder: (_) => HomeTvPage());
-            case NowPlayingTvPage.ROUTE_NAME:
+            case nowPlayingTvPage:
               return MaterialPageRoute(builder: (_) => NowPlayingTvPage());
-            case PopularTvPage.ROUTE_NAME:
+            case popularTvPage:
               return MaterialPageRoute(builder: (_) => PopularTvPage());
-            case TopRatedTvPage.ROUTE_NAME:
+            case topRatedTvPage:
               return MaterialPageRoute(builder: (_) => TopRatedTvPage());
-            case TvDetailPage.ROUTE_NAME:
+            case tvDetailPage:
               final id = settings.arguments as int;
               return MaterialPageRoute(
                 builder: (_) => TvDetailPage(id: id),
                 settings: settings,
               );
-            case SearchTvPage.ROUTE_NAME:
+            case searchTvPage:
               return MaterialPageRoute(builder: (_) => SearchTvPage());
-            case WatchlistTvPage.ROUTE_NAME:
+            case watchlistTvPage:
               return MaterialPageRoute(builder: (_) => WatchlistTvPage());
 
-            case SeasonDetailPage.ROUTE_NAME:
+            case searchTvPage:
               final args = settings.arguments as ScreenArguments;
               return MaterialPageRoute(
                 builder: (_) => SeasonDetailPage(
