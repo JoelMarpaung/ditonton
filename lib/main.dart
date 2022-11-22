@@ -1,5 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie/presentation/bloc/movie_detail_bloc/movie_detail_bloc.dart';
+import 'package:movie/presentation/bloc/movie_now_playing_bloc/movie_now_playing_bloc.dart';
+import 'package:movie/presentation/bloc/movie_popular_bloc/movie_popular_bloc.dart';
+import 'package:movie/presentation/bloc/movie_search_bloc/movie_search_bloc.dart';
+import 'package:movie/presentation/bloc/movie_top_rated_bloc/movie_top_rated_bloc.dart';
+import 'package:movie/presentation/bloc/movie_watchlist_bloc/movie_watchlist_bloc.dart';
 import 'package:provider/provider.dart';
 
 import 'package:ditonton/injection.dart' as di;
@@ -47,6 +54,24 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        BlocProvider(
+          create: (_) => di.locator<MovieSearchBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MovieNowPlayingBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MoviePopularBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MovieTopRatedBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MovieDetailBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<MovieWatchlistBloc>(),
+        ),
         ChangeNotifierProvider(
           create: (_) => di.locator<MovieListNotifier>(),
         ),
@@ -89,6 +114,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => di.locator<SeasonDetailNotifier>(),
         ),
+
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
