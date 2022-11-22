@@ -6,7 +6,6 @@ import 'package:core/common/state_enum.dart';
 import '../bloc/tv_popular_bloc/tv_popular_event.dart';
 import '../bloc/tv_popular_bloc/tv_popular_state.dart';
 import '../bloc/tv_popular_bloc/tv_popular_bloc.dart';
-import '../provider/popular_tv_notifier.dart';
 import '../widgets/tv_card_list.dart';
 
 class PopularTvPage extends StatefulWidget {

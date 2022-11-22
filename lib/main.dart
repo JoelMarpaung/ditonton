@@ -33,14 +33,6 @@ import 'package:tv/presentation/pages/season_detail_page.dart';
 import 'package:tv/presentation/pages/top_rated_tv_page.dart';
 import 'package:tv/presentation/pages/tv_detail_page.dart';
 import 'package:tv/presentation/pages/watchlist_tv_page.dart';
-import 'package:tv/presentation/provider/now_playing_tv_notifier.dart';
-import 'package:tv/presentation/provider/popular_tv_notifier.dart';
-import 'package:tv/presentation/provider/season_detail_notifier.dart';
-import 'package:tv/presentation/provider/top_rated_tv_notifier.dart';
-import 'package:tv/presentation/provider/tv_detail_notifier.dart';
-import 'package:tv/presentation/provider/tv_list_notifier.dart';
-import 'package:tv/presentation/provider/tv_search_notifier.dart';
-import 'package:tv/presentation/provider/watchlist_tv_notifier.dart';
 
 import 'package:core/core.dart';
 import 'package:about/about_page.dart';
@@ -94,31 +86,6 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (_) => di.locator<SeasonDetailBloc>(),
-        ),
-
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvListNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvDetailNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSearchNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedTvsNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularTvsNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<NowPlayingTvsNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistTvNotifier>(),
-        ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<SeasonDetailNotifier>(),
         ),
 
       ],

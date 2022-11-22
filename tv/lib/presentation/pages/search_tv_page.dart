@@ -7,7 +7,6 @@ import 'package:core/common/state_enum.dart';
 import '../bloc/tv_search_bloc/tv_search_bloc.dart';
 import '../bloc/tv_search_bloc/tv_search_event.dart';
 import '../bloc/tv_search_bloc/tv_search_state.dart';
-import '../provider/tv_search_notifier.dart';
 import '../widgets/tv_card_list.dart';
 
 class SearchTvPage extends StatelessWidget {

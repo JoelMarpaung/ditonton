@@ -17,7 +17,6 @@ import '../bloc/tv_detail_bloc/tv_detail_bloc.dart';
 import '../bloc/tv_watchlist_bloc/tv_watchlist_state.dart';
 import '../bloc/tv_watchlist_bloc/tv_watchlist_event.dart';
 import '../bloc/tv_watchlist_bloc/tv_watchlist_bloc.dart';
-import '../provider/tv_detail_notifier.dart';
 
 class TvDetailPage extends StatefulWidget {
   static const ROUTE_NAME = '/detail-tv';

@@ -6,7 +6,6 @@ import 'package:core/common/state_enum.dart';
 import '../bloc/tv_top_rated_bloc/tv_top_rated_state.dart';
 import '../bloc/tv_top_rated_bloc/tv_top_rated_event.dart';
 import '../bloc/tv_top_rated_bloc/tv_top_rated_bloc.dart';
-import '../provider/top_rated_tv_notifier.dart';
 import '../widgets/tv_card_list.dart';
 
 class TopRatedTvPage extends StatefulWidget {

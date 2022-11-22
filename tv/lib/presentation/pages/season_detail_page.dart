@@ -9,7 +9,6 @@ import '../../domain/entities/season_detail.dart';
 import '../bloc/season_detail_bloc/season_detail_state.dart';
 import '../bloc/season_detail_bloc/season_detail_event.dart';
 import '../bloc/season_detail_bloc/season_detail_bloc.dart';
-import '../provider/season_detail_notifier.dart';
 import '../widgets/episode_card_list.dart';
 
 class SeasonDetailPage extends StatefulWidget {

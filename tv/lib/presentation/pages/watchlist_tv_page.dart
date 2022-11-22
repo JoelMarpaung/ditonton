@@ -7,7 +7,6 @@ import 'package:core/common/utils.dart';
 import '../bloc/tv_watchlist_bloc/tv_watchlist_state.dart';
 import '../bloc/tv_watchlist_bloc/tv_watchlist_event.dart';
 import '../bloc/tv_watchlist_bloc/tv_watchlist_bloc.dart';
-import '../provider/watchlist_tv_notifier.dart';
 import '../widgets/tv_card_list.dart';
 
 class WatchlistTvPage extends StatefulWidget {
