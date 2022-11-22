@@ -1,0 +1,28 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "poster_path": "/path.jpg",
+      "popularity": 29.780826,
+      "id": 1399,
+      "backdrop_path": "/path.jpg",
+      "vote_average": 7.91,
+      "overview": "overview",
+      "first_air_date": "2011-04-17",
+      "origin_country": [
+        "US"
+      ],
+      "genre_ids": [
+        10765,
+        10759,
+        18
+      ],
+      "original_language": "en",
+      "vote_count": 1172,
+      "name": "Game of Thrones",
+      "original_name": "Game of Thrones"
+    }
+  ],
+  "total_results": 1,
+  "total_pages": 1
+}

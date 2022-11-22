@@ -38,12 +38,8 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
 
   @override
   Future<List<TvModel>> getNowPlayingTvs() async {
-    HttpClient client = HttpClient(context: await globalContext);
-    client.badCertificateCallback =
-        (X509Certificate cert, String host, int port) => false;
-    IOClient ioClient = IOClient(client);
     final response =
-        await ioClient.get(Uri.parse('$baseUrl/tv/airing_today?$apiKey'));
+        await client.get(Uri.parse('$baseUrl/tv/airing_today?$apiKey'));
 
     if (response.statusCode == 200) {
       return TvResponse.fromJson(json.decode(response.body)).tvList;
@@ -54,11 +50,7 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
 
   @override
   Future<TvDetailResponse> getTvDetail(int id) async {
-    HttpClient client = HttpClient(context: await globalContext);
-    client.badCertificateCallback =
-        (X509Certificate cert, String host, int port) => false;
-    IOClient ioClient = IOClient(client);
-    final response = await ioClient.get(Uri.parse('$baseUrl/tv/$id?$apiKey'));
+    final response = await client.get(Uri.parse('$baseUrl/tv/$id?$apiKey'));
 
     if (response.statusCode == 200) {
       return TvDetailResponse.fromJson(json.decode(response.body));
@@ -69,12 +61,8 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
 
   @override
   Future<List<TvModel>> getTvRecommendations(int id) async {
-    HttpClient client = HttpClient(context: await globalContext);
-    client.badCertificateCallback =
-        (X509Certificate cert, String host, int port) => false;
-    IOClient ioClient = IOClient(client);
     final response =
-        await ioClient.get(Uri.parse('$baseUrl/tv/$id/recommendations?$apiKey'));
+        await client.get(Uri.parse('$baseUrl/tv/$id/recommendations?$apiKey'));
 
     if (response.statusCode == 200) {
       return TvResponse.fromJson(json.decode(response.body)).tvList;
@@ -85,11 +73,7 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
 
   @override
   Future<List<TvModel>> getPopularTvs() async {
-    HttpClient client = HttpClient(context: await globalContext);
-    client.badCertificateCallback =
-        (X509Certificate cert, String host, int port) => false;
-    IOClient ioClient = IOClient(client);
-    final response = await ioClient.get(Uri.parse('$baseUrl/tv/popular?$apiKey'));
+    final response = await client.get(Uri.parse('$baseUrl/tv/popular?$apiKey'));
 
     if (response.statusCode == 200) {
       return TvResponse.fromJson(json.decode(response.body)).tvList;
@@ -100,12 +84,8 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
 
   @override
   Future<List<TvModel>> getTopRatedTvs() async {
-    HttpClient client = HttpClient(context: await globalContext);
-    client.badCertificateCallback =
-        (X509Certificate cert, String host, int port) => false;
-    IOClient ioClient = IOClient(client);
     final response =
-        await ioClient.get(Uri.parse('$baseUrl/tv/top_rated?$apiKey'));
+        await client.get(Uri.parse('$baseUrl/tv/top_rated?$apiKey'));
 
     if (response.statusCode == 200) {
       return TvResponse.fromJson(json.decode(response.body)).tvList;
@@ -116,12 +96,8 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
 
   @override
   Future<List<TvModel>> searchTvs(String query) async {
-    HttpClient client = HttpClient(context: await globalContext);
-    client.badCertificateCallback =
-        (X509Certificate cert, String host, int port) => false;
-    IOClient ioClient = IOClient(client);
     final response =
-        await ioClient.get(Uri.parse('$baseUrl/search/tv?$apiKey&query=$query'));
+        await client.get(Uri.parse('$baseUrl/search/tv?$apiKey&query=$query'));
 
     if (response.statusCode == 200) {
       return TvResponse.fromJson(json.decode(response.body)).tvList;
@@ -132,11 +108,7 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
 
   @override
   Future<SeasonDetailModel> getSeasonDetail(int id, int seasonNumber) async {
-    HttpClient client = HttpClient(context: await globalContext);
-    client.badCertificateCallback =
-        (X509Certificate cert, String host, int port) => false;
-    IOClient ioClient = IOClient(client);
-    final response = await ioClient
+    final response = await client
         .get(Uri.parse('$baseUrl/tv/$id/season/$seasonNumber?$apiKey'));
 
     if (response.statusCode == 200) {
