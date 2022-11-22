@@ -2,16 +2,16 @@ import 'package:core/common/utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../bloc/movie_watchlist_bloc/movie_watchlist_bloc.dart';
 import '../bloc/movie_watchlist_bloc/movie_watchlist_event.dart';
 import '../bloc/movie_watchlist_bloc/movie_watchlist_state.dart';
 
 class WatchlistMoviesPage extends StatefulWidget {
-  static const ROUTE_NAME = '/watchlist-movie';
+  const WatchlistMoviesPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _WatchlistMoviesPageState createState() => _WatchlistMoviesPageState();
 }
 
@@ -20,7 +20,7 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
   @override
   void initState() {
     super.initState();
-    context.read<MovieWatchlistBloc>().add(OnFetchMovieWatchlist());
+    context.read<MovieWatchlistBloc>().add(const OnFetchMovieWatchlist());
   }
 
   @override
@@ -29,8 +29,9 @@ class _WatchlistMoviesPageState extends State<WatchlistMoviesPage>
     routeObserver.subscribe(this, ModalRoute.of(context)!);
   }
 
+  @override
   void didPopNext() {
-    context.read<MovieWatchlistBloc>().add(OnFetchMovieWatchlist());
+    context.read<MovieWatchlistBloc>().add(const OnFetchMovieWatchlist());
   }
 
   @override

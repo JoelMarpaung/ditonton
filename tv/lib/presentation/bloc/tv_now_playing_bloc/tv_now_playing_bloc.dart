@@ -4,21 +4,19 @@ import 'package:tv/presentation/bloc/tv_now_playing_bloc/tv_now_playing_state.da
 
 import '../../../domain/usecases/get_now_playing_tv.dart';
 
-
 class TvNowPlayingBloc extends Bloc<TvNowPlayingEvent, TvNowPlayingState> {
   final GetNowPlayingTvs _nowPlayingTvs;
 
   TvNowPlayingBloc(this._nowPlayingTvs) : super(NowPlayingEmpty()) {
     on<OnFetchTvNowPlaying>((event, emit) async {
-
       emit(NowPlayingLoading());
       final result = await _nowPlayingTvs.execute();
 
       result.fold(
-            (failure) {
+        (failure) {
           emit(NowPlayingError(failure.message));
         },
-            (data) {
+        (data) {
           emit(NowPlayingHasData(data));
         },
       );

@@ -8,8 +8,7 @@ import '../../../domain/usecases/save_watchlist_tv.dart';
 import 'tv_watchlist_event.dart';
 import 'tv_watchlist_state.dart';
 
-class TvWatchlistBloc
-    extends Bloc<TvWatchlistEvent, TvWatchlistState> {
+class TvWatchlistBloc extends Bloc<TvWatchlistEvent, TvWatchlistState> {
   String message = '';
   bool status = false;
   final GetWatchlistTvs _watchlistTvs;
@@ -20,7 +19,6 @@ class TvWatchlistBloc
   TvWatchlistBloc(this._watchlistTvs, this._saveWatchlist,
       this._removeWatchlist, this._status)
       : super(WatchlistEmpty()) {
-
     on<OnFetchTvWatchlist>((event, emit) async {
       emit(WatchlistLoading());
       final result = await _watchlistTvs.execute();

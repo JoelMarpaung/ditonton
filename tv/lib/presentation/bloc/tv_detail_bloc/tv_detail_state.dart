@@ -17,7 +17,7 @@ class DetailLoading extends TvDetailState {}
 class DetailError extends TvDetailState {
   final String message;
 
-  DetailError(this.message);
+  const DetailError(this.message);
 
   @override
   List<Object> get props => [message];
@@ -28,7 +28,7 @@ class DetailHasData extends TvDetailState {
   final List<Tv> recommend;
   final bool watchlist;
 
-  DetailHasData(this.result, this.recommend, this.watchlist);
+  const DetailHasData(this.result, this.recommend, this.watchlist);
 
   @override
   List<Object> get props => [result, recommend, watchlist];

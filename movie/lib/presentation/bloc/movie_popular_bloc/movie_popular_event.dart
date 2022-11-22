@@ -8,7 +8,7 @@ abstract class MoviePopularEvent extends Equatable {
 }
 
 class OnFetchMoviePopular extends MoviePopularEvent {
-  OnFetchMoviePopular();
+  const OnFetchMoviePopular();
 
   @override
   List<Object> get props => [];

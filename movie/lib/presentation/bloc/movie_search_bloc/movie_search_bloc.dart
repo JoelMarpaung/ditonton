@@ -4,6 +4,7 @@ import 'package:movie/presentation/bloc/movie_search_bloc/movie_search_state.dar
 import 'package:rxdart/rxdart.dart';
 
 import '../../../domain/usecases/search_movies.dart';
+
 class MovieSearchBloc extends Bloc<MovieSearchEvent, MovieSearchState> {
   final SearchMovies _searchMovies;
 
@@ -15,17 +16,15 @@ class MovieSearchBloc extends Bloc<MovieSearchEvent, MovieSearchState> {
       final result = await _searchMovies.execute(query);
 
       result.fold(
-            (failure) {
+        (failure) {
           emit(SearchError(failure.message));
         },
-            (data) {
+        (data) {
           emit(SearchHasData(data));
         },
       );
     }, transformer: debounce(const Duration(milliseconds: 500)));
-
   }
-
 }
 
 EventTransformer<T> debounce<T>(Duration duration) {

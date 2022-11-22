@@ -16,7 +16,7 @@ class TopRatedLoading extends MovieTopRatedState {}
 class TopRatedError extends MovieTopRatedState {
   final String message;
 
-  TopRatedError(this.message);
+  const TopRatedError(this.message);
 
   @override
   List<Object> get props => [message];
@@ -25,7 +25,7 @@ class TopRatedError extends MovieTopRatedState {
 class TopRatedHasData extends MovieTopRatedState {
   final List<Movie> result;
 
-  TopRatedHasData(this.result);
+  const TopRatedHasData(this.result);
 
   @override
   List<Object> get props => [result];

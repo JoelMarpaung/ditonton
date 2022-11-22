@@ -20,7 +20,6 @@ class MovieWatchlistBloc
   MovieWatchlistBloc(this._watchlistMovies, this._saveWatchlist,
       this._removeWatchlist, this._status)
       : super(WatchlistEmpty()) {
-
     on<OnFetchMovieWatchlist>((event, emit) async {
       emit(WatchlistLoading());
       final result = await _watchlistMovies.execute();

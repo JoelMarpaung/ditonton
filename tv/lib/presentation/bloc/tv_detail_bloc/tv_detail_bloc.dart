@@ -10,7 +10,6 @@ class TvDetailBloc extends Bloc<TvDetailEvent, TvDetailState> {
   final GetTvRecommendations _recommendations;
   final GetWatchListStatusTv _status;
 
-
   TvDetailBloc(this._detailTvs, this._recommendations, this._status)
       : super(DetailEmpty()) {
     on<OnFetchTvDetail>((event, emit) async {

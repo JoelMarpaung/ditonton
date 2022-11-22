@@ -10,9 +10,8 @@ abstract class SeasonDetailEvent extends Equatable {
 class OnFetchSeasonDetail extends SeasonDetailEvent {
   final int id;
   final int seasonNumber;
-  OnFetchSeasonDetail(this.id, this.seasonNumber);
+  const OnFetchSeasonDetail(this.id, this.seasonNumber);
 
   @override
   List<Object> get props => [];
 }
-

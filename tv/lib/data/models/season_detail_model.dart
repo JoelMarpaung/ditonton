@@ -4,7 +4,7 @@ import 'package:tv/domain/entities/season_detail.dart';
 import 'episode_model.dart';
 
 class SeasonDetailModel extends Equatable {
-  SeasonDetailModel({
+  const SeasonDetailModel({
     required this.id,
     required this.name,
     required this.overview,
@@ -41,12 +41,12 @@ class SeasonDetailModel extends Equatable {
 
   SeasonDetail toEntity() {
     return SeasonDetail(
-      id: this.id,
-      name: this.name,
-      overview: this.overview,
-      posterPath: this.posterPath,
-      seasonNumber: this.seasonNumber,
-      episodes: this.episodes.map((episode) => episode.toEntity()).toList(),
+      id: id,
+      name: name,
+      overview: overview,
+      posterPath: posterPath,
+      seasonNumber: seasonNumber,
+      episodes: episodes.map((episode) => episode.toEntity()).toList(),
     );
   }
 

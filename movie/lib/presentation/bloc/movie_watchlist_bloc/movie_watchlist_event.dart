@@ -10,7 +10,7 @@ abstract class MovieWatchlistEvent extends Equatable {
 }
 
 class OnFetchMovieWatchlist extends MovieWatchlistEvent {
-  OnFetchMovieWatchlist();
+  const OnFetchMovieWatchlist();
 
   @override
   List<Object> get props => [];
@@ -19,7 +19,7 @@ class OnFetchMovieWatchlist extends MovieWatchlistEvent {
 class OnAddWatchlistMovie extends MovieWatchlistEvent {
   final MovieDetail movieDetail;
 
-  OnAddWatchlistMovie(this.movieDetail);
+  const OnAddWatchlistMovie(this.movieDetail);
 
   @override
   List<Object> get props => [];
@@ -28,7 +28,7 @@ class OnAddWatchlistMovie extends MovieWatchlistEvent {
 class OnRemoveWatchlistMovie extends MovieWatchlistEvent {
   final MovieDetail movieDetail;
 
-  OnRemoveWatchlistMovie(this.movieDetail);
+  const OnRemoveWatchlistMovie(this.movieDetail);
 
   @override
   List<Object> get props => [];
@@ -37,7 +37,7 @@ class OnRemoveWatchlistMovie extends MovieWatchlistEvent {
 class OnWatchlistMovieStatus extends MovieWatchlistEvent {
   final int id;
 
-  OnWatchlistMovieStatus(this.id);
+  const OnWatchlistMovieStatus(this.id);
 
   @override
   List<Object> get props => [];

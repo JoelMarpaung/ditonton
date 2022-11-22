@@ -5,7 +5,7 @@ import 'package:tv/domain/entities/tv_detail.dart';
 import 'genre_model.dart';
 
 class TvDetailResponse extends Equatable {
-  TvDetailResponse({
+  const TvDetailResponse({
     required this.originalLanguage,
     required this.backdropPath,
     required this.genres,
@@ -68,18 +68,18 @@ class TvDetailResponse extends Equatable {
 
   TvDetail toEntity() {
     return TvDetail(
-        posterPath: this.posterPath,
-        popularity: this.popularity,
-        id: this.id,
-        backdropPath: this.backdropPath,
-        voteAverage: this.voteAverage,
-        overview: this.overview,
-        genres: this.genres.map((genre) => genre.toEntity()).toList(),
-        seasons: this.seasons.map((season) => season.toEntity()).toList(),
-        originalLanguage: this.originalLanguage,
-        voteCount: this.voteCount,
-        name: this.name,
-        originalName: this.originalName);
+        posterPath: posterPath,
+        popularity: popularity,
+        id: id,
+        backdropPath: backdropPath,
+        voteAverage: voteAverage,
+        overview: overview,
+        genres: genres.map((genre) => genre.toEntity()).toList(),
+        seasons: seasons.map((season) => season.toEntity()).toList(),
+        originalLanguage: originalLanguage,
+        voteCount: voteCount,
+        name: name,
+        originalName: originalName);
   }
 
   @override

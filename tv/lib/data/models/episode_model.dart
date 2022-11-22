@@ -2,7 +2,7 @@ import 'package:tv/domain/entities/episode.dart';
 import 'package:equatable/equatable.dart';
 
 class EpisodeModel extends Equatable {
-  EpisodeModel({
+  const EpisodeModel({
     required this.id,
     required this.name,
     required this.overview,
@@ -38,12 +38,12 @@ class EpisodeModel extends Equatable {
 
   Episode toEntity() {
     return Episode(
-        id: this.id,
-        name: this.name,
-        overview: this.overview,
-        stillPath: this.stillPath,
-        seasonNumber: this.seasonNumber,
-        episodeNumber: this.episodeNumber);
+        id: id,
+        name: name,
+        overview: overview,
+        stillPath: stillPath,
+        seasonNumber: seasonNumber,
+        episodeNumber: episodeNumber);
   }
 
   @override

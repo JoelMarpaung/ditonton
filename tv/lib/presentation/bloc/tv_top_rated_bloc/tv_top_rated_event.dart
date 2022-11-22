@@ -8,7 +8,7 @@ abstract class TvTopRatedEvent extends Equatable {
 }
 
 class OnFetchTvTopRated extends TvTopRatedEvent {
-  OnFetchTvTopRated();
+  const OnFetchTvTopRated();
 
   @override
   List<Object> get props => [];

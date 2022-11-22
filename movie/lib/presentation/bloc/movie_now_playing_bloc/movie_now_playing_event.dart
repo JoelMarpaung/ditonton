@@ -8,7 +8,7 @@ abstract class MovieNowPlayingEvent extends Equatable {
 }
 
 class OnFetchMovieNowPlaying extends MovieNowPlayingEvent {
-  OnFetchMovieNowPlaying();
+  const OnFetchMovieNowPlaying();
 
   @override
   List<Object> get props => [];

@@ -11,7 +11,7 @@ class SeasonCard extends StatelessWidget {
   final String posterPath;
   final int id;
 
-  SeasonCard(this.season, this.posterPath, this.id);
+  const SeasonCard(this.season, this.posterPath, this.id, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -48,11 +48,11 @@ class SeasonCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       style: kHeading6,
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text(
-                      season.episodeCount.toString() + ' episodes.',
+                      '${season.episodeCount} episodes.',
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     Text(
                       season.overview,
                       maxLines: 2,
@@ -68,15 +68,15 @@ class SeasonCard extends StatelessWidget {
                 bottom: 16,
               ),
               child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${season.posterPath ?? posterPath}',
+                  imageUrl: '$baseImageUrl${season.posterPath ?? posterPath}',
                   width: 80,
-                  placeholder: (context, url) => Center(
+                  placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(8)),
               ),
             ),
           ],

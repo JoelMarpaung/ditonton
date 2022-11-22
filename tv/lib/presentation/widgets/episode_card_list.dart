@@ -8,7 +8,7 @@ class EpisodeCard extends StatelessWidget {
   final Episode episode;
   final String posterPath;
 
-  EpisodeCard(this.episode, this.posterPath);
+  const EpisodeCard(this.episode, this.posterPath, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class EpisodeCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Episode - ' + episode.episodeNumber.toString(),
+                      'Episode - ${episode.episodeNumber}',
                       style: kHeading6,
                     ),
                     Text(
@@ -53,15 +53,15 @@ class EpisodeCard extends StatelessWidget {
                 bottom: 16,
               ),
               child: ClipRRect(
+                borderRadius: const BorderRadius.all(Radius.circular(8)),
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${episode.stillPath ?? posterPath}',
+                  imageUrl: '$baseImageUrl${episode.stillPath ?? posterPath}',
                   width: 80,
-                  placeholder: (context, url) => Center(
+                  placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
-                borderRadius: BorderRadius.all(Radius.circular(8)),
               ),
             ),
           ],

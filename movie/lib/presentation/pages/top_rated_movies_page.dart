@@ -1,17 +1,16 @@
-import 'package:core/common/state_enum.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/presentation/widgets/movie_card_list.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../bloc/movie_top_rated_bloc/movie_top_rated_bloc.dart';
 import '../bloc/movie_top_rated_bloc/movie_top_rated_event.dart';
 import '../bloc/movie_top_rated_bloc/movie_top_rated_state.dart';
 
 class TopRatedMoviesPage extends StatefulWidget {
-  static const ROUTE_NAME = '/top-rated-movie';
+  const TopRatedMoviesPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _TopRatedMoviesPageState createState() => _TopRatedMoviesPageState();
 }
 
@@ -19,7 +18,7 @@ class _TopRatedMoviesPageState extends State<TopRatedMoviesPage> {
   @override
   void initState() {
     super.initState();
-    context.read<MovieTopRatedBloc>().add(OnFetchMovieTopRated());
+    context.read<MovieTopRatedBloc>().add(const OnFetchMovieTopRated());
   }
 
   @override

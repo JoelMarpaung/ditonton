@@ -16,7 +16,7 @@ class NowPlayingLoading extends TvNowPlayingState {}
 class NowPlayingError extends TvNowPlayingState {
   final String message;
 
-  NowPlayingError(this.message);
+  const NowPlayingError(this.message);
 
   @override
   List<Object> get props => [message];
@@ -25,7 +25,7 @@ class NowPlayingError extends TvNowPlayingState {
 class NowPlayingHasData extends TvNowPlayingState {
   final List<Tv> result;
 
-  NowPlayingHasData(this.result);
+  const NowPlayingHasData(this.result);
 
   @override
   List<Object> get props => [result];

@@ -16,7 +16,7 @@ class WatchlistLoading extends TvWatchlistState {}
 class WatchlistError extends TvWatchlistState {
   final String message;
 
-  WatchlistError(this.message);
+  const WatchlistError(this.message);
 
   @override
   List<Object> get props => [message];
@@ -25,7 +25,7 @@ class WatchlistError extends TvWatchlistState {
 class WatchlistHasData extends TvWatchlistState {
   final List<Tv> result;
 
-  WatchlistHasData(this.result);
+  const WatchlistHasData(this.result);
 
   @override
   List<Object> get props => [result];
@@ -34,12 +34,13 @@ class WatchlistHasData extends TvWatchlistState {
 class WatchlistSuccess extends TvWatchlistState {
   final String message;
 
-  WatchlistSuccess(this.message);
+  const WatchlistSuccess(this.message);
 
   @override
   List<Object> get props => [message];
 }
 
+// ignore: must_be_immutable
 class WatchlistState extends TvWatchlistState {
   bool isAddedToWatchlist = false;
 

@@ -17,8 +17,9 @@ import '../bloc/movie_top_rated_bloc/movie_top_rated_bloc.dart';
 import '../bloc/movie_top_rated_bloc/movie_top_rated_state.dart';
 
 class HomeMoviePage extends StatefulWidget {
-  static const ROUTE_NAME = '/home';
+  const HomeMoviePage({super.key});
   @override
+  // ignore: library_private_types_in_public_api
   _HomeMoviePageState createState() => _HomeMoviePageState();
 }
 
@@ -26,9 +27,9 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
   @override
   void initState() {
     super.initState();
-    context.read<MovieNowPlayingBloc>().add(OnFetchMovieNowPlaying());
-    context.read<MoviePopularBloc>().add(OnFetchMoviePopular());
-    context.read<MovieTopRatedBloc>().add(OnFetchMovieTopRated());
+    context.read<MovieNowPlayingBloc>().add(const OnFetchMovieNowPlaying());
+    context.read<MoviePopularBloc>().add(const OnFetchMoviePopular());
+    context.read<MovieTopRatedBloc>().add(const OnFetchMovieTopRated());
   }
 
   @override
@@ -153,11 +154,11 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
 class MovieList extends StatelessWidget {
   final List<Movie> movies;
 
-  MovieList(this.movies);
+  const MovieList(this.movies, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 200,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -176,11 +177,11 @@ class MovieList extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: const BorderRadius.all(Radius.circular(16)),
                 child: CachedNetworkImage(
-                  imageUrl: '$BASE_IMAGE_URL${movie.posterPath}',
+                  imageUrl: '$baseImageUrl${movie.posterPath}',
                   placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),
             ),

@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 
 import 'genre.dart';
 
+// ignore: must_be_immutable
 class TvDetail extends Equatable {
   TvDetail(
       {required this.posterPath,

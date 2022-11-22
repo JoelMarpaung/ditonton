@@ -1,10 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 import 'package:core/common/constants.dart';
-import 'package:core/common/state_enum.dart';
 import '../../domain/entities/season_detail.dart';
 import '../bloc/season_detail_bloc/season_detail_state.dart';
 import '../bloc/season_detail_bloc/season_detail_event.dart';
@@ -12,8 +10,6 @@ import '../bloc/season_detail_bloc/season_detail_bloc.dart';
 import '../widgets/episode_card_list.dart';
 
 class SeasonDetailPage extends StatefulWidget {
-  static const ROUTE_NAME = '/detail-season';
-
   final int id;
   final int seasonNumber;
   final String posterPath;
@@ -32,7 +28,9 @@ class _SeasonDetailPageState extends State<SeasonDetailPage> {
   @override
   void initState() {
     super.initState();
-    context.read<SeasonDetailBloc>().add(OnFetchSeasonDetail(widget.id, widget.seasonNumber));
+    context
+        .read<SeasonDetailBloc>()
+        .add(OnFetchSeasonDetail(widget.id, widget.seasonNumber));
   }
 
   @override
@@ -67,7 +65,7 @@ class _SeasonDetailPageState extends State<SeasonDetailPage> {
 class DetailContent extends StatelessWidget {
   final SeasonDetail season;
   final String posterPath;
-  DetailContent(this.season, this.posterPath);
+  const DetailContent(this.season, this.posterPath, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -78,17 +76,17 @@ class DetailContent extends StatelessWidget {
           imageUrl:
               'https://image.tmdb.org/t/p/w500${season.posterPath ?? posterPath}',
           width: screenWidth,
-          placeholder: (context, url) => Center(
+          placeholder: (context, url) => const Center(
             child: CircularProgressIndicator(),
           ),
-          errorWidget: (context, url, error) => Icon(Icons.error),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
         Container(
           margin: const EdgeInsets.only(top: 48 + 8),
           child: DraggableScrollableSheet(
             builder: (context, scrollController) {
               return Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: kRichBlack,
                   borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
                 ),
@@ -110,7 +108,7 @@ class DetailContent extends StatelessWidget {
                               season.name,
                               style: kHeading5,
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             Text(
                               'Overview',
                               style: kHeading6,
@@ -118,7 +116,7 @@ class DetailContent extends StatelessWidget {
                             Text(
                               season.overview,
                             ),
-                            SizedBox(height: 16),
+                            const SizedBox(height: 16),
                             Text(
                               'Seasons',
                               style: kHeading6,
@@ -158,7 +156,7 @@ class DetailContent extends StatelessWidget {
             backgroundColor: kRichBlack,
             foregroundColor: Colors.white,
             child: IconButton(
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               onPressed: () {
                 Navigator.pop(context);
               },

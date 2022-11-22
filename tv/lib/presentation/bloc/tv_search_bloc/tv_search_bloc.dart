@@ -4,6 +4,7 @@ import 'package:tv/presentation/bloc/tv_search_bloc/tv_search_state.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../domain/usecases/search_tv.dart';
+
 class TvSearchBloc extends Bloc<TvSearchEvent, TvSearchState> {
   final SearchTvs _searchTvs;
 
@@ -15,17 +16,15 @@ class TvSearchBloc extends Bloc<TvSearchEvent, TvSearchState> {
       final result = await _searchTvs.execute(query);
 
       result.fold(
-            (failure) {
+        (failure) {
           emit(SearchError(failure.message));
         },
-            (data) {
+        (data) {
           emit(SearchHasData(data));
         },
       );
     }, transformer: debounce(const Duration(milliseconds: 500)));
-
   }
-
 }
 
 EventTransformer<T> debounce<T>(Duration duration) {

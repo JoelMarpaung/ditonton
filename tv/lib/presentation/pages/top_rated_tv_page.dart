@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
-import 'package:core/common/state_enum.dart';
 import '../bloc/tv_top_rated_bloc/tv_top_rated_state.dart';
 import '../bloc/tv_top_rated_bloc/tv_top_rated_event.dart';
 import '../bloc/tv_top_rated_bloc/tv_top_rated_bloc.dart';
 import '../widgets/tv_card_list.dart';
 
 class TopRatedTvPage extends StatefulWidget {
-  static const ROUTE_NAME = '/top-rated-tv';
   const TopRatedTvPage({Key? key}) : super(key: key);
 
   @override
@@ -20,14 +17,14 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
   @override
   void initState() {
     super.initState();
-    context.read<TvTopRatedBloc>().add(OnFetchTvTopRated());
+    context.read<TvTopRatedBloc>().add(const OnFetchTvTopRated());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Top Rated Tv Series'),
+        title: const Text('Top Rated Tv Series'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -40,8 +37,8 @@ class _TopRatedTvPageState extends State<TopRatedTvPage> {
             } else if (state is TopRatedHasData) {
               return ListView.builder(
                 itemBuilder: (context, index) {
-                  final Tv = state.result[index];
-                  return TvCard(Tv);
+                  final tv = state.result[index];
+                  return TvCard(tv);
                 },
                 itemCount: state.result.length,
               );

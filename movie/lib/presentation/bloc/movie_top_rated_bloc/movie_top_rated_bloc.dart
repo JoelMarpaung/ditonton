@@ -3,21 +3,19 @@ import '../../../domain/usecases/get_top_rated_movies.dart';
 import 'movie_top_rated_event.dart';
 import 'movie_top_rated_state.dart';
 
-
 class MovieTopRatedBloc extends Bloc<MovieTopRatedEvent, MovieTopRatedState> {
   final GetTopRatedMovies _topRatedMovies;
 
   MovieTopRatedBloc(this._topRatedMovies) : super(TopRatedEmpty()) {
     on<OnFetchMovieTopRated>((event, emit) async {
-
       emit(TopRatedLoading());
       final result = await _topRatedMovies.execute();
 
       result.fold(
-            (failure) {
+        (failure) {
           emit(TopRatedError(failure.message));
         },
-            (data) {
+        (data) {
           emit(TopRatedHasData(data));
         },
       );

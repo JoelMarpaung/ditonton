@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 const watchlistAddSuccessMessage = 'Added to Watchlist';
 const watchlistRemoveSuccessMessage = 'Removed from Watchlist';
 
-const String BASE_IMAGE_URL = 'https://image.tmdb.org/t/p/w500';
+const String baseImageUrl = 'https://image.tmdb.org/t/p/w500';
 
 // colors
 const Color kRichBlack = Color(0xFF000814);
