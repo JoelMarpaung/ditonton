@@ -26,8 +26,7 @@ void main() {
   blocTest<TvTopRatedBloc, TvTopRatedState>(
     'should emit Loading state and then HasData state when data successfully fetched',
     build: () {
-      when(topRatedTvs.execute())
-          .thenAnswer((_) async => Right(testTvList));
+      when(topRatedTvs.execute()).thenAnswer((_) async => Right(testTvList));
       return tvTopRatedBloc;
     },
     act: (bloc) => bloc.add(const OnFetchTvTopRated()),
@@ -45,7 +44,7 @@ void main() {
     'should emit Loading state and then HasData state when data unsuccessfully fetched',
     build: () {
       when(topRatedTvs.execute())
-          .thenAnswer((_) async =>const Left(ServerFailure('Server Failure')));
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       return tvTopRatedBloc;
     },
     act: (bloc) => bloc.add(const OnFetchTvTopRated()),

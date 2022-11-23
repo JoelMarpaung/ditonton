@@ -15,16 +15,16 @@ void main() {
     usecase = GetSeasonDetail(mockTvRepository);
   });
 
-  final tId = 1;
-  final tSeasonNumber = 1;
+  const tId = 1;
+  const tSeasonNumber = 1;
 
   test('should get Season detail from the repository', () async {
     // arrange
     when(mockTvRepository.getSeasonDetail(tId, tSeasonNumber))
-        .thenAnswer((_) async => Right(testSeasonDetail));
+        .thenAnswer((_) async => const Right(testSeasonDetail));
     // act
     final result = await usecase.execute(tId, tSeasonNumber);
     // assert
-    expect(result, Right(testSeasonDetail));
+    expect(result, const Right(testSeasonDetail));
   });
 }

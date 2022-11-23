@@ -28,7 +28,6 @@ import 'package:tv/presentation/bloc/tv_popular_bloc/tv_popular_bloc.dart';
 import 'package:tv/presentation/bloc/tv_search_bloc/tv_search_bloc.dart';
 import 'package:tv/presentation/bloc/tv_top_rated_bloc/tv_top_rated_bloc.dart';
 import 'package:tv/presentation/bloc/tv_watchlist_bloc/tv_watchlist_bloc.dart';
-import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 
 import 'package:tv/data/datasources/tv_local_data_source.dart';

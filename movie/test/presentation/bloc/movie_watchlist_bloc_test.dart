@@ -11,21 +11,21 @@ import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/bloc_helper_test.mocks.dart';
 
 void main() {
-  late MockGetWatchlistMovies _watchlistMovies;
-  late MockGetWatchListStatus _status;
-  late MockSaveWatchlist _saveWatchlist;
-  late MockRemoveWatchlist _removeWatchlist;
+  late MockGetWatchlistMovies watchlistMovies;
+  late MockGetWatchListStatus status;
+  late MockSaveWatchlist saveWatchlist;
+  late MockRemoveWatchlist removeWatchlist;
   late MovieWatchlistBloc movieWatchlistBloc;
 
   const testId = 1;
 
   setUp(() {
-    _watchlistMovies = MockGetWatchlistMovies();
-    _status = MockGetWatchListStatus();
-    _saveWatchlist = MockSaveWatchlist();
-    _removeWatchlist = MockRemoveWatchlist();
+    watchlistMovies = MockGetWatchlistMovies();
+    status = MockGetWatchListStatus();
+    saveWatchlist = MockSaveWatchlist();
+    removeWatchlist = MockRemoveWatchlist();
     movieWatchlistBloc = MovieWatchlistBloc(
-        _watchlistMovies, _saveWatchlist, _removeWatchlist, _status);
+        watchlistMovies, saveWatchlist, removeWatchlist, status);
   });
 
   test('the initial state should be empty', () {
@@ -36,7 +36,7 @@ void main() {
     blocTest<MovieWatchlistBloc, MovieWatchlistState>(
       'should emit Loading state and then HasData state when data successfully fetched',
       build: () {
-        when(_watchlistMovies.execute())
+        when(watchlistMovies.execute())
             .thenAnswer((_) async => Right(testMovieList));
         return movieWatchlistBloc;
       },
@@ -46,7 +46,7 @@ void main() {
         WatchlistHasData(testMovieList),
       ],
       verify: (bloc) {
-        verify(_watchlistMovies.execute());
+        verify(watchlistMovies.execute());
         return const OnFetchMovieWatchlist().props;
       },
     );
@@ -54,7 +54,7 @@ void main() {
     blocTest<MovieWatchlistBloc, MovieWatchlistState>(
       'should emit Loading state and then HasData state when data unsuccessfully fetched',
       build: () {
-        when(_watchlistMovies.execute()).thenAnswer(
+        when(watchlistMovies.execute()).thenAnswer(
             (_) async => const Left(ServerFailure('Server Failure')));
         return movieWatchlistBloc;
       },
@@ -73,7 +73,7 @@ void main() {
     blocTest<MovieWatchlistBloc, MovieWatchlistState>(
       'should emit Loading state and then HasData state when data successfully fetched',
       build: () {
-        when(_status.execute(testId)).thenAnswer((_) async => true);
+        when(status.execute(testId)).thenAnswer((_) async => true);
         return movieWatchlistBloc;
       },
       act: (bloc) => bloc.add(const OnWatchlistMovieStatus(testId)),
@@ -81,7 +81,7 @@ void main() {
         WatchlistState(true),
       ],
       verify: (bloc) {
-        verify(_status.execute(testId));
+        verify(status.execute(testId));
         return const OnWatchlistMovieStatus(testId).props;
       },
     );
@@ -91,28 +91,28 @@ void main() {
     blocTest<MovieWatchlistBloc, MovieWatchlistState>(
       'should emit Loading state and then HasData state when data successfully fetched',
       build: () {
-        when(_saveWatchlist.execute(testMovieDetail))
+        when(saveWatchlist.execute(testMovieDetail))
             .thenAnswer((_) async => const Right(watchlistAddSuccessMessage));
         return movieWatchlistBloc;
       },
-      act: (bloc) => bloc.add(OnAddWatchlistMovie(testMovieDetail)),
+      act: (bloc) => bloc.add(const OnAddWatchlistMovie(testMovieDetail)),
       expect: () => [
         WatchlistState(true),
       ],
       verify: (bloc) {
-        verify(_saveWatchlist.execute(testMovieDetail));
-        return OnAddWatchlistMovie(testMovieDetail).props;
+        verify(saveWatchlist.execute(testMovieDetail));
+        return const OnAddWatchlistMovie(testMovieDetail).props;
       },
     );
 
     blocTest<MovieWatchlistBloc, MovieWatchlistState>(
       'should emit Loading state and then HasData state when data unsuccessfully fetched',
       build: () {
-        when(_saveWatchlist.execute(testMovieDetail))
-            .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
+        when(saveWatchlist.execute(testMovieDetail)).thenAnswer(
+            (_) async => const Left(ServerFailure('Server Failure')));
         return movieWatchlistBloc;
       },
-      act: (bloc) => bloc.add(OnAddWatchlistMovie(testMovieDetail)),
+      act: (bloc) => bloc.add(const OnAddWatchlistMovie(testMovieDetail)),
       expect: () => [
         const WatchlistError('Server Failure'),
       ],
@@ -126,28 +126,28 @@ void main() {
     blocTest<MovieWatchlistBloc, MovieWatchlistState>(
       'should emit Loading state and then HasData state when data successfully fetched',
       build: () {
-        when(_removeWatchlist.execute(testMovieDetail))
-            .thenAnswer((_) async => const Right(watchlistRemoveSuccessMessage));
+        when(removeWatchlist.execute(testMovieDetail)).thenAnswer(
+            (_) async => const Right(watchlistRemoveSuccessMessage));
         return movieWatchlistBloc;
       },
-      act: (bloc) => bloc.add(OnRemoveWatchlistMovie(testMovieDetail)),
+      act: (bloc) => bloc.add(const OnRemoveWatchlistMovie(testMovieDetail)),
       expect: () => [
         WatchlistState(false),
       ],
       verify: (bloc) {
-        verify(_removeWatchlist.execute(testMovieDetail));
-        return OnRemoveWatchlistMovie(testMovieDetail).props;
+        verify(removeWatchlist.execute(testMovieDetail));
+        return const OnRemoveWatchlistMovie(testMovieDetail).props;
       },
     );
 
     blocTest<MovieWatchlistBloc, MovieWatchlistState>(
       'should emit Loading state and then HasData state when data unsuccessfully fetched',
       build: () {
-        when(_removeWatchlist.execute(testMovieDetail))
-            .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
+        when(removeWatchlist.execute(testMovieDetail)).thenAnswer(
+            (_) async => const Left(ServerFailure('Server Failure')));
         return movieWatchlistBloc;
       },
-      act: (bloc) => bloc.add(OnRemoveWatchlistMovie(testMovieDetail)),
+      act: (bloc) => bloc.add(const OnRemoveWatchlistMovie(testMovieDetail)),
       expect: () => [
         const WatchlistError('Server Failure'),
       ],

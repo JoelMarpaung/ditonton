@@ -1,4 +1,3 @@
-
 import 'package:mockito/annotations.dart';
 import 'package:movie/domain/usecases/get_movie_detail.dart';
 import 'package:movie/domain/usecases/get_movie_recommendations.dart';

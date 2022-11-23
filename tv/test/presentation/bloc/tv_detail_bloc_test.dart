@@ -11,18 +11,18 @@ import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/bloc_helper_test.mocks.dart';
 
 void main() {
-  late MockGetTvDetail _detailTvs;
-  late MockGetTvRecommendations _recommendations;
-  late MockGetWatchListStatusTv _status;
+  late MockGetTvDetail detailTvs;
+  late MockGetTvRecommendations recommendations;
+  late MockGetWatchListStatusTv status;
   late TvDetailBloc tvDetailBloc;
 
   const testId = 1;
 
   setUp(() {
-    _detailTvs = MockGetTvDetail();
-    _recommendations = MockGetTvRecommendations();
-    _status = MockGetWatchListStatusTv();
-    tvDetailBloc = TvDetailBloc(_detailTvs, _recommendations, _status);
+    detailTvs = MockGetTvDetail();
+    recommendations = MockGetTvRecommendations();
+    status = MockGetWatchListStatusTv();
+    tvDetailBloc = TvDetailBloc(detailTvs, recommendations, status);
   });
 
   test('the initial state should be empty', () {
@@ -32,12 +32,11 @@ void main() {
   blocTest<TvDetailBloc, TvDetailState>(
     'should emit Loading state and then HasData state when data successfully fetched',
     build: () {
-      when(_detailTvs.execute(testId))
+      when(detailTvs.execute(testId))
           .thenAnswer((_) async => Right(testTvDetail));
-      when(_recommendations.execute(testId))
+      when(recommendations.execute(testId))
           .thenAnswer((_) async => Right(testTvList));
-      when(_status.execute(testId))
-          .thenAnswer((_) async => true);
+      when(status.execute(testId)).thenAnswer((_) async => true);
       return tvDetailBloc;
     },
     act: (bloc) => bloc.add(const OnFetchTvDetail(testId)),
@@ -46,9 +45,9 @@ void main() {
       DetailHasData(testTvDetail, testTvList, true),
     ],
     verify: (bloc) {
-      verify(_detailTvs.execute(testId));
-      verify(_recommendations.execute(testId));
-      verify(_status.execute(testId));
+      verify(detailTvs.execute(testId));
+      verify(recommendations.execute(testId));
+      verify(status.execute(testId));
       return const OnFetchTvDetail(testId).props;
     },
   );
@@ -56,12 +55,11 @@ void main() {
   blocTest<TvDetailBloc, TvDetailState>(
     'should emit Loading state and then HasData state when data unsuccessfully fetched',
     build: () {
-      when(_detailTvs.execute(testId))
+      when(detailTvs.execute(testId))
           .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
-      when(_recommendations.execute(testId))
+      when(recommendations.execute(testId))
           .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
-      when(_status.execute(testId))
-          .thenAnswer((_) async => false);
+      when(status.execute(testId)).thenAnswer((_) async => false);
       return tvDetailBloc;
     },
     act: (bloc) => bloc.add(const OnFetchTvDetail(testId)),

@@ -11,10 +11,13 @@ void main() {
   // with widgets in the test environment.
   testWidgets('AboutPage has a text description', (tester) async {
     // Create the widget by telling the tester to build it.
-    await tester.pumpWidget(const MaterialApp(home: AboutPage(),));
+    await tester.pumpWidget(const MaterialApp(
+      home: AboutPage(),
+    ));
 
     // Create the Finders.
-    final messageFinder = find.text('Ditonton merupakan sebuah aplikasi katalog film yang dikembangkan oleh Dicoding Indonesia sebagai contoh proyek aplikasi untuk kelas Menjadi Flutter Developer Expert.');
+    final messageFinder = find.text(
+        'Ditonton merupakan sebuah aplikasi katalog film yang dikembangkan oleh Dicoding Indonesia sebagai contoh proyek aplikasi untuk kelas Menjadi Flutter Developer Expert.');
 
     // Use the `findsOneWidget` matcher provided by flutter_test to
     // verify that the Text widgets appear exactly once in the widget tree.

@@ -11,18 +11,18 @@ import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/bloc_helper_test.mocks.dart';
 
 void main() {
-  late MockGetMovieDetail _detailMovies;
-  late MockGetMovieRecommendations _recommendations;
-  late MockGetWatchListStatus _status;
+  late MockGetMovieDetail detailMovies;
+  late MockGetMovieRecommendations recommendations;
+  late MockGetWatchListStatus status;
   late MovieDetailBloc movieDetailBloc;
 
   const testId = 1;
 
   setUp(() {
-    _detailMovies = MockGetMovieDetail();
-    _recommendations = MockGetMovieRecommendations();
-    _status = MockGetWatchListStatus();
-    movieDetailBloc = MovieDetailBloc(_detailMovies, _recommendations, _status);
+    detailMovies = MockGetMovieDetail();
+    recommendations = MockGetMovieRecommendations();
+    status = MockGetWatchListStatus();
+    movieDetailBloc = MovieDetailBloc(detailMovies, recommendations, status);
   });
 
   test('the initial state should be empty', () {
@@ -32,12 +32,11 @@ void main() {
   blocTest<MovieDetailBloc, MovieDetailState>(
     'should emit Loading state and then HasData state when data successfully fetched',
     build: () {
-      when(_detailMovies.execute(testId))
-          .thenAnswer((_) async => Right(testMovieDetail));
-      when(_recommendations.execute(testId))
+      when(detailMovies.execute(testId))
+          .thenAnswer((_) async => const Right(testMovieDetail));
+      when(recommendations.execute(testId))
           .thenAnswer((_) async => Right(testMovieList));
-      when(_status.execute(testId))
-          .thenAnswer((_) async => true);
+      when(status.execute(testId)).thenAnswer((_) async => true);
       return movieDetailBloc;
     },
     act: (bloc) => bloc.add(const OnFetchMovieDetail(testId)),
@@ -46,9 +45,9 @@ void main() {
       DetailHasData(testMovieDetail, testMovieList, true),
     ],
     verify: (bloc) {
-      verify(_detailMovies.execute(testId));
-      verify(_recommendations.execute(testId));
-      verify(_status.execute(testId));
+      verify(detailMovies.execute(testId));
+      verify(recommendations.execute(testId));
+      verify(status.execute(testId));
       return const OnFetchMovieDetail(testId).props;
     },
   );
@@ -56,12 +55,11 @@ void main() {
   blocTest<MovieDetailBloc, MovieDetailState>(
     'should emit Loading state and then HasData state when data unsuccessfully fetched',
     build: () {
-      when(_detailMovies.execute(testId))
+      when(detailMovies.execute(testId))
           .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
-      when(_recommendations.execute(testId))
+      when(recommendations.execute(testId))
           .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
-      when(_status.execute(testId))
-          .thenAnswer((_) async => false);
+      when(status.execute(testId)).thenAnswer((_) async => false);
       return movieDetailBloc;
     },
     act: (bloc) => bloc.add(const OnFetchMovieDetail(testId)),

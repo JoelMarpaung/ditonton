@@ -15,17 +15,16 @@ void main() {
     usecase = GetTvRecommendations(mockTvRepository);
   });
 
-  final tId = 1;
+  const tId = 1;
   final tTvs = <Tv>[];
 
-  test('should get list of Tv recommendations from the repository',
-          () async {
-        // arrange
-        when(mockTvRepository.getTvRecommendations(tId))
-            .thenAnswer((_) async => Right(tTvs));
-        // act
-        final result = await usecase.execute(tId);
-        // assert
-        expect(result, Right(tTvs));
-      });
+  test('should get list of Tv recommendations from the repository', () async {
+    // arrange
+    when(mockTvRepository.getTvRecommendations(tId))
+        .thenAnswer((_) async => Right(tTvs));
+    // act
+    final result = await usecase.execute(tId);
+    // assert
+    expect(result, Right(tTvs));
+  });
 }

@@ -11,12 +11,12 @@ import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/bloc_helper_test.mocks.dart';
 
 void main() {
-  late MockGetNowPlayingTvs _nowPlayingTvs;
+  late MockGetNowPlayingTvs nowPlayingTvs;
   late TvNowPlayingBloc tvNowPlayingBloc;
 
   setUp(() {
-    _nowPlayingTvs = MockGetNowPlayingTvs();
-    tvNowPlayingBloc = TvNowPlayingBloc(_nowPlayingTvs);
+    nowPlayingTvs = MockGetNowPlayingTvs();
+    tvNowPlayingBloc = TvNowPlayingBloc(nowPlayingTvs);
   });
 
   test('the initial state should be empty', () {
@@ -26,8 +26,7 @@ void main() {
   blocTest<TvNowPlayingBloc, TvNowPlayingState>(
     'should emit Loading state and then HasData state when data successfully fetched',
     build: () {
-      when(_nowPlayingTvs.execute())
-          .thenAnswer((_) async => Right(testTvList));
+      when(nowPlayingTvs.execute()).thenAnswer((_) async => Right(testTvList));
       return tvNowPlayingBloc;
     },
     act: (bloc) => bloc.add(const OnFetchTvNowPlaying()),
@@ -36,7 +35,7 @@ void main() {
       NowPlayingHasData(testTvList),
     ],
     verify: (bloc) {
-      verify(_nowPlayingTvs.execute());
+      verify(nowPlayingTvs.execute());
       return const OnFetchTvNowPlaying().props;
     },
   );
@@ -44,8 +43,8 @@ void main() {
   blocTest<TvNowPlayingBloc, TvNowPlayingState>(
     'should emit Loading state and then HasData state when data unsuccessfully fetched',
     build: () {
-      when(_nowPlayingTvs.execute())
-          .thenAnswer((_) async =>const Left(ServerFailure('Server Failure')));
+      when(nowPlayingTvs.execute())
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       return tvNowPlayingBloc;
     },
     act: (bloc) => bloc.add(const OnFetchTvNowPlaying()),

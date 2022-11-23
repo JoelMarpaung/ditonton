@@ -1,18 +1,12 @@
-
-
 import 'package:movie/data/models/movie_table.dart';
 import 'package:movie/domain/entities/genre.dart';
 import 'package:movie/domain/entities/movie.dart';
 import 'package:movie/domain/entities/movie_detail.dart';
-import 'package:tv/data/models/tv_table.dart';
-import 'package:tv/domain/entities/season_detail.dart';
-import 'package:tv/domain/entities/tv.dart';
-import 'package:tv/domain/entities/tv_detail.dart';
 
 final testMovie = Movie(
   adult: false,
   backdropPath: '/muth4OYamXf41G2evdrLEg8d3om.jpg',
-  genreIds: [14, 28],
+  genreIds: const [14, 28],
   id: 557,
   originalTitle: 'Spider-Man',
   overview:
@@ -26,11 +20,9 @@ final testMovie = Movie(
   voteCount: 13507,
 );
 
-
 final testMovieList = [testMovie];
 
-
-final testMovieDetail = MovieDetail(
+const testMovieDetail = MovieDetail(
   adult: false,
   backdropPath: 'backdropPath',
   genres: [Genre(id: 1, name: 'Action')],
@@ -45,8 +37,6 @@ final testMovieDetail = MovieDetail(
   voteCount: 1,
 );
 
-
-
 final testWatchlistMovie = Movie.watchlist(
   id: 1,
   title: 'title',
@@ -54,10 +44,7 @@ final testWatchlistMovie = Movie.watchlist(
   overview: 'overview',
 );
 
-final testWatchListTv =
-    Tv.watchlist(id: 0, overview: '', posterPath: '', name: '');
-
-final testMovieTable = MovieTable(
+const testMovieTable = MovieTable(
   id: 1,
   title: 'title',
   posterPath: 'posterPath',
@@ -70,4 +57,3 @@ final testMovieMap = {
   'posterPath': 'posterPath',
   'title': 'title',
 };
-

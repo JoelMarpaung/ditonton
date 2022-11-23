@@ -11,21 +11,21 @@ import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/bloc_helper_test.mocks.dart';
 
 void main() {
-  late MockGetWatchlistTvs _watchlistTvs;
-  late MockGetWatchListStatusTv _status;
-  late MockSaveWatchlistTv _saveWatchlist;
-  late MockRemoveWatchlistTv _removeWatchlist;
+  late MockGetWatchlistTvs watchlistTvs;
+  late MockGetWatchListStatusTv status;
+  late MockSaveWatchlistTv saveWatchlist;
+  late MockRemoveWatchlistTv removeWatchlist;
   late TvWatchlistBloc tvWatchlistBloc;
 
   const testId = 1;
 
   setUp(() {
-    _watchlistTvs = MockGetWatchlistTvs();
-    _status = MockGetWatchListStatusTv();
-    _saveWatchlist = MockSaveWatchlistTv();
-    _removeWatchlist = MockRemoveWatchlistTv();
-    tvWatchlistBloc = TvWatchlistBloc(
-        _watchlistTvs, _saveWatchlist, _removeWatchlist, _status);
+    watchlistTvs = MockGetWatchlistTvs();
+    status = MockGetWatchListStatusTv();
+    saveWatchlist = MockSaveWatchlistTv();
+    removeWatchlist = MockRemoveWatchlistTv();
+    tvWatchlistBloc =
+        TvWatchlistBloc(watchlistTvs, saveWatchlist, removeWatchlist, status);
   });
 
   test('the initial state should be empty', () {
@@ -36,8 +36,7 @@ void main() {
     blocTest<TvWatchlistBloc, TvWatchlistState>(
       'should emit Loading state and then HasData state when data successfully fetched',
       build: () {
-        when(_watchlistTvs.execute())
-            .thenAnswer((_) async => Right(testTvList));
+        when(watchlistTvs.execute()).thenAnswer((_) async => Right(testTvList));
         return tvWatchlistBloc;
       },
       act: (bloc) => bloc.add(const OnFetchTvWatchlist()),
@@ -46,7 +45,7 @@ void main() {
         WatchlistHasData(testTvList),
       ],
       verify: (bloc) {
-        verify(_watchlistTvs.execute());
+        verify(watchlistTvs.execute());
         return const OnFetchTvWatchlist().props;
       },
     );
@@ -54,7 +53,7 @@ void main() {
     blocTest<TvWatchlistBloc, TvWatchlistState>(
       'should emit Loading state and then HasData state when data unsuccessfully fetched',
       build: () {
-        when(_watchlistTvs.execute()).thenAnswer(
+        when(watchlistTvs.execute()).thenAnswer(
             (_) async => const Left(ServerFailure('Server Failure')));
         return tvWatchlistBloc;
       },
@@ -73,7 +72,7 @@ void main() {
     blocTest<TvWatchlistBloc, TvWatchlistState>(
       'should emit Loading state and then HasData state when data successfully fetched',
       build: () {
-        when(_status.execute(testId)).thenAnswer((_) async => true);
+        when(status.execute(testId)).thenAnswer((_) async => true);
         return tvWatchlistBloc;
       },
       act: (bloc) => bloc.add(const OnWatchlistTvStatus(testId)),
@@ -81,7 +80,7 @@ void main() {
         WatchlistState(true),
       ],
       verify: (bloc) {
-        verify(_status.execute(testId));
+        verify(status.execute(testId));
         return const OnWatchlistTvStatus(testId).props;
       },
     );
@@ -91,7 +90,7 @@ void main() {
     blocTest<TvWatchlistBloc, TvWatchlistState>(
       'should emit Loading state and then HasData state when data successfully fetched',
       build: () {
-        when(_saveWatchlist.execute(testTvDetail))
+        when(saveWatchlist.execute(testTvDetail))
             .thenAnswer((_) async => const Right(watchlistAddSuccessMessage));
         return tvWatchlistBloc;
       },
@@ -100,7 +99,7 @@ void main() {
         WatchlistState(true),
       ],
       verify: (bloc) {
-        verify(_saveWatchlist.execute(testTvDetail));
+        verify(saveWatchlist.execute(testTvDetail));
         return OnAddWatchlistTv(testTvDetail).props;
       },
     );
@@ -108,8 +107,8 @@ void main() {
     blocTest<TvWatchlistBloc, TvWatchlistState>(
       'should emit Loading state and then HasData state when data unsuccessfully fetched',
       build: () {
-        when(_saveWatchlist.execute(testTvDetail))
-            .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
+        when(saveWatchlist.execute(testTvDetail)).thenAnswer(
+            (_) async => const Left(ServerFailure('Server Failure')));
         return tvWatchlistBloc;
       },
       act: (bloc) => bloc.add(OnAddWatchlistTv(testTvDetail)),
@@ -126,8 +125,8 @@ void main() {
     blocTest<TvWatchlistBloc, TvWatchlistState>(
       'should emit Loading state and then HasData state when data successfully fetched',
       build: () {
-        when(_removeWatchlist.execute(testTvDetail))
-            .thenAnswer((_) async => const Right(watchlistRemoveSuccessMessage));
+        when(removeWatchlist.execute(testTvDetail)).thenAnswer(
+            (_) async => const Right(watchlistRemoveSuccessMessage));
         return tvWatchlistBloc;
       },
       act: (bloc) => bloc.add(OnRemoveWatchlistTv(testTvDetail)),
@@ -135,7 +134,7 @@ void main() {
         WatchlistState(false),
       ],
       verify: (bloc) {
-        verify(_removeWatchlist.execute(testTvDetail));
+        verify(removeWatchlist.execute(testTvDetail));
         return OnRemoveWatchlistTv(testTvDetail).props;
       },
     );
@@ -143,8 +142,8 @@ void main() {
     blocTest<TvWatchlistBloc, TvWatchlistState>(
       'should emit Loading state and then HasData state when data unsuccessfully fetched',
       build: () {
-        when(_removeWatchlist.execute(testTvDetail))
-            .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
+        when(removeWatchlist.execute(testTvDetail)).thenAnswer(
+            (_) async => const Left(ServerFailure('Server Failure')));
         return tvWatchlistBloc;
       },
       act: (bloc) => bloc.add(OnRemoveWatchlistTv(testTvDetail)),

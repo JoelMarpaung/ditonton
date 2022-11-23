@@ -11,14 +11,14 @@ import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/bloc_helper_test.mocks.dart';
 
 void main() {
-  late MockSearchMovies _searchMovies;
+  late MockSearchMovies searchMovies;
   late MovieSearchBloc movieSearchBloc;
 
   const testQuery = 'game of throne';
 
   setUp(() {
-    _searchMovies = MockSearchMovies();
-    movieSearchBloc = MovieSearchBloc(_searchMovies);
+    searchMovies = MockSearchMovies();
+    movieSearchBloc = MovieSearchBloc(searchMovies);
   });
 
   test('the initial state should be empty', () {
@@ -28,7 +28,7 @@ void main() {
   blocTest<MovieSearchBloc, MovieSearchState>(
     'should emit Loading state and then HasData state when data successfully fetched',
     build: () {
-      when(_searchMovies.execute(testQuery))
+      when(searchMovies.execute(testQuery))
           .thenAnswer((_) async => Right(testMovieList));
       return movieSearchBloc;
     },
@@ -39,7 +39,7 @@ void main() {
       SearchHasData(testMovieList),
     ],
     verify: (bloc) {
-      verify(_searchMovies.execute(testQuery));
+      verify(searchMovies.execute(testQuery));
       return const OnQueryChanged(testQuery).props;
     },
   );
@@ -47,7 +47,7 @@ void main() {
   blocTest<MovieSearchBloc, MovieSearchState>(
     'should emit Loading state and then HasData state when data unsuccessfully fetched',
     build: () {
-      when(_searchMovies.execute(testQuery))
+      when(searchMovies.execute(testQuery))
           .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       return movieSearchBloc;
     },

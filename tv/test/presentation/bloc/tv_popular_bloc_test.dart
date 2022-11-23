@@ -11,12 +11,12 @@ import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/bloc_helper_test.mocks.dart';
 
 void main() {
-  late MockGetPopularTvs _popularTvs;
+  late MockGetPopularTvs popularTvs;
   late TvPopularBloc tvPopularBloc;
 
   setUp(() {
-    _popularTvs = MockGetPopularTvs();
-    tvPopularBloc = TvPopularBloc(_popularTvs);
+    popularTvs = MockGetPopularTvs();
+    tvPopularBloc = TvPopularBloc(popularTvs);
   });
 
   test('the initial state should be empty', () {
@@ -26,8 +26,7 @@ void main() {
   blocTest<TvPopularBloc, TvPopularState>(
     'should emit Loading state and then HasData state when data successfully fetched',
     build: () {
-      when(_popularTvs.execute())
-          .thenAnswer((_) async => Right(testTvList));
+      when(popularTvs.execute()).thenAnswer((_) async => Right(testTvList));
       return tvPopularBloc;
     },
     act: (bloc) => bloc.add(const OnFetchTvPopular()),
@@ -36,7 +35,7 @@ void main() {
       PopularHasData(testTvList),
     ],
     verify: (bloc) {
-      verify(_popularTvs.execute());
+      verify(popularTvs.execute());
       return const OnFetchTvPopular().props;
     },
   );
@@ -44,8 +43,8 @@ void main() {
   blocTest<TvPopularBloc, TvPopularState>(
     'should emit Loading state and then HasData state when data unsuccessfully fetched',
     build: () {
-      when(_popularTvs.execute())
-          .thenAnswer((_) async =>const Left(ServerFailure('Server Failure')));
+      when(popularTvs.execute())
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       return tvPopularBloc;
     },
     act: (bloc) => bloc.add(const OnFetchTvPopular()),

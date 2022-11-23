@@ -45,7 +45,7 @@ void main() {
     'should emit Loading state and then HasData state when data unsuccessfully fetched',
     build: () {
       when(topRatedMovies.execute())
-          .thenAnswer((_) async =>const Left(ServerFailure('Server Failure')));
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       return movieTopRatedBloc;
     },
     act: (bloc) => bloc.add(const OnFetchMovieTopRated()),

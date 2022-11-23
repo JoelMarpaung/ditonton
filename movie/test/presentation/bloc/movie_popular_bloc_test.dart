@@ -11,12 +11,12 @@ import '../../dummy_data/dummy_objects.dart';
 import '../../helpers/bloc_helper_test.mocks.dart';
 
 void main() {
-  late MockGetPopularMovies _popularMovies;
+  late MockGetPopularMovies popularMovies;
   late MoviePopularBloc moviePopularBloc;
 
   setUp(() {
-    _popularMovies = MockGetPopularMovies();
-    moviePopularBloc = MoviePopularBloc(_popularMovies);
+    popularMovies = MockGetPopularMovies();
+    moviePopularBloc = MoviePopularBloc(popularMovies);
   });
 
   test('the initial state should be empty', () {
@@ -26,7 +26,7 @@ void main() {
   blocTest<MoviePopularBloc, MoviePopularState>(
     'should emit Loading state and then HasData state when data successfully fetched',
     build: () {
-      when(_popularMovies.execute())
+      when(popularMovies.execute())
           .thenAnswer((_) async => Right(testMovieList));
       return moviePopularBloc;
     },
@@ -36,7 +36,7 @@ void main() {
       PopularHasData(testMovieList),
     ],
     verify: (bloc) {
-      verify(_popularMovies.execute());
+      verify(popularMovies.execute());
       return const OnFetchMoviePopular().props;
     },
   );
@@ -44,8 +44,8 @@ void main() {
   blocTest<MoviePopularBloc, MoviePopularState>(
     'should emit Loading state and then HasData state when data unsuccessfully fetched',
     build: () {
-      when(_popularMovies.execute())
-          .thenAnswer((_) async =>const Left(ServerFailure('Server Failure')));
+      when(popularMovies.execute())
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
       return moviePopularBloc;
     },
     act: (bloc) => bloc.add(const OnFetchMoviePopular()),
