@@ -48,8 +48,6 @@ void main() async{
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // FirebaseAnalytics analytics = FirebaseAnalytics.instance;
-  // await analytics.logAppOpen();
 
   di.init();
   runApp(MyApp());
