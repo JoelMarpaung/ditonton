@@ -858,6 +858,13 @@ DA:22,0
 LF:3
 LH:0
 end_of_record
+SF:./tv/lib/domain/usecases/search_tv.dart
+DA:9,1
+DA:11,1
+DA:12,2
+LF:3
+LH:3
+end_of_record
 SF:./tv/lib/data/repositories/tv_repository_impl.dart
 DA:18,1
 DA:23,1
@@ -912,13 +919,6 @@ DA:137,1
 DA:139,1
 LF:51
 LH:51
-end_of_record
-SF:./tv/lib/domain/usecases/search_tv.dart
-DA:9,1
-DA:11,1
-DA:12,2
-LF:3
-LH:3
 end_of_record
 SF:./tv/lib/domain/usecases/get_watchlist_status_tv.dart
 DA:6,1
