@@ -21,7 +21,7 @@ final testTv = Tv(
     name: '',
     originalName: '');
 
-
+final statusTv = Future<bool>.value(true);
 
 final testTvList = [testTv];
 
