@@ -4,9 +4,6 @@ import '../../../domain/entities/movie_detail.dart';
 
 abstract class MovieWatchlistEvent extends Equatable {
   const MovieWatchlistEvent();
-
-  @override
-  List<Object> get props => [];
 }
 
 class OnFetchMovieWatchlist extends MovieWatchlistEvent {

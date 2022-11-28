@@ -71,4 +71,27 @@ void main() {
       DetailLoading();
     },
   );
+
+  blocTest<MovieDetailBloc, MovieDetailState>(
+    'should emit Loading state and then HasData state when data successfully fetched',
+    build: () {
+      when(detailMovies.execute(testId))
+          .thenAnswer((_) async => const Right(testMovieDetail));
+      when(recommendations.execute(testId))
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
+      when(status.execute(testId)).thenAnswer((_) async => true);
+      return movieDetailBloc;
+    },
+    act: (bloc) => bloc.add(const OnFetchMovieDetail(testId)),
+    expect: () => [
+      DetailLoading(),
+      const DetailError('Server Failure'),
+    ],
+    verify: (bloc) {
+      verify(detailMovies.execute(testId));
+      verify(recommendations.execute(testId));
+      verify(status.execute(testId));
+      DetailLoading();
+    },
+  );
 }

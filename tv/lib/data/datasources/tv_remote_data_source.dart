@@ -28,13 +28,6 @@ class TvRemoteDataSourceImpl implements TvRemoteDataSource {
 
   TvRemoteDataSourceImpl({required this.client});
 
-  Future<SecurityContext> get globalContext async {
-    final sslCert = await rootBundle.load('certificates/certificate.pem');
-    SecurityContext securityContext = SecurityContext(withTrustedRoots: false);
-    securityContext.setTrustedCertificatesBytes(sslCert.buffer.asInt8List());
-    return securityContext;
-  }
-
   @override
   Future<List<TvModel>> getNowPlayingTvs() async {
     final response =

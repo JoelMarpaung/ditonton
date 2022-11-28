@@ -61,4 +61,22 @@ void main() {
       SearchLoading();
     },
   );
+
+  blocTest<TvSearchBloc, TvSearchState>(
+    'should emit Loading state and then HasData state when data unsuccessfully fetched',
+    build: () {
+      when(searchTvs.execute(testQuery))
+          .thenAnswer((_) async => const Left(SSLFailure('CERTIFICATE_VERIFY_FAILED')));
+      return tvSearchBloc;
+    },
+    act: (bloc) => bloc.add(const OnQueryChanged(testQuery)),
+    wait: const Duration(milliseconds: 500),
+    expect: () => [
+      SearchLoading(),
+      const SearchError('CERTIFICATE_VERIFY_FAILED'),
+    ],
+    verify: (bloc) {
+      SearchLoading();
+    },
+  );
 }

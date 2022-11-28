@@ -31,15 +31,6 @@ class WatchlistHasData extends MovieWatchlistState {
   List<Object> get props => [result];
 }
 
-class WatchlistSuccess extends MovieWatchlistState {
-  final String message;
-
-  const WatchlistSuccess(this.message);
-
-  @override
-  List<Object> get props => [message];
-}
-
 // ignore: must_be_immutable
 class WatchlistState extends MovieWatchlistState {
   bool isAddedToWatchlist = false;

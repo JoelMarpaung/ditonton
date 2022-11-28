@@ -56,4 +56,21 @@ void main() {
       TopRatedLoading();
     },
   );
+
+  blocTest<TvTopRatedBloc, TvTopRatedState>(
+    'should emit Loading state and then HasData state when data unsuccessfully fetched',
+    build: () {
+      when(topRatedTvs.execute())
+          .thenAnswer((_) async => const Left(SSLFailure('CERTIFICATE_VERIFY_FAILED')));
+      return tvTopRatedBloc;
+    },
+    act: (bloc) => bloc.add(const OnFetchTvTopRated()),
+    expect: () => [
+      TopRatedLoading(),
+      const TopRatedError('CERTIFICATE_VERIFY_FAILED'),
+    ],
+    verify: (bloc) {
+      TopRatedLoading();
+    },
+  );
 }

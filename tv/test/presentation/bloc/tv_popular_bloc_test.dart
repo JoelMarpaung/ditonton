@@ -56,4 +56,21 @@ void main() {
       PopularLoading();
     },
   );
+
+  blocTest<TvPopularBloc, TvPopularState>(
+    'should emit Loading state and then HasData state when data unsuccessfully fetched',
+    build: () {
+      when(popularTvs.execute())
+          .thenAnswer((_) async => const Left(SSLFailure('CERTIFICATE_VERIFY_FAILED')));
+      return tvPopularBloc;
+    },
+    act: (bloc) => bloc.add(const OnFetchTvPopular()),
+    expect: () => [
+      PopularLoading(),
+      const PopularError('CERTIFICATE_VERIFY_FAILED'),
+    ],
+    verify: (bloc) {
+      PopularLoading();
+    },
+  );
 }

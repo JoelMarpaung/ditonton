@@ -62,4 +62,22 @@ void main() {
       DetailLoading();
     },
   );
+
+  blocTest<SeasonDetailBloc, SeasonDetailState>(
+    'should emit Loading state and then HasData state when data unsuccessfully fetched',
+    build: () {
+      when(detailSeasons.execute(testId, testSeasonNumber))
+          .thenAnswer((_) async => const Left(SSLFailure('CERTIFICATE_VERIFY_FAILED')));
+      return seasonDetailBloc;
+    },
+    act: (bloc) =>
+        bloc.add(const OnFetchSeasonDetail(testId, testSeasonNumber)),
+    expect: () => [
+      DetailLoading(),
+      const DetailError('CERTIFICATE_VERIFY_FAILED'),
+    ],
+    verify: (bloc) {
+      DetailLoading();
+    },
+  );
 }

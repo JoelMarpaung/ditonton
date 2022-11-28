@@ -71,4 +71,47 @@ void main() {
       DetailLoading();
     },
   );
+
+  blocTest<TvDetailBloc, TvDetailState>(
+    'should emit Loading state and then HasData state when data unsuccessfully fetched',
+    build: () {
+      when(detailTvs.execute(testId))
+          .thenAnswer((_) async => const Left(SSLFailure('CERTIFICATE_VERIFY_FAILED')));
+      when(recommendations.execute(testId))
+          .thenAnswer((_) async => const Left(SSLFailure('CERTIFICATE_VERIFY_FAILED')));
+      when(status.execute(testId)).thenAnswer((_) async => false);
+      return tvDetailBloc;
+    },
+    act: (bloc) => bloc.add(const OnFetchTvDetail(testId)),
+    expect: () => [
+      DetailLoading(),
+      const DetailError('CERTIFICATE_VERIFY_FAILED'),
+    ],
+    verify: (bloc) {
+      DetailLoading();
+    },
+  );
+
+  blocTest<TvDetailBloc, TvDetailState>(
+    'should emit Loading state and then HasData state when data successfully fetched',
+    build: () {
+      when(detailTvs.execute(testId))
+          .thenAnswer((_) async => Right(testTvDetail));
+      when(recommendations.execute(testId))
+          .thenAnswer((_) async => const Left(ServerFailure('Server Failure')));
+      when(status.execute(testId)).thenAnswer((_) async => true);
+      return tvDetailBloc;
+    },
+    act: (bloc) => bloc.add(const OnFetchTvDetail(testId)),
+    expect: () => [
+      DetailLoading(),
+      const DetailError('Server Failure'),
+    ],
+    verify: (bloc) {
+      verify(detailTvs.execute(testId));
+      verify(recommendations.execute(testId));
+      verify(status.execute(testId));
+      DetailLoading();
+    },
+  );
 }

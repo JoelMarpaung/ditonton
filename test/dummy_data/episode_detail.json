@@ -1,0 +1,32 @@
+{
+  "air_date": "2011-04-17",
+  "crew": [
+    {
+      "id": 44797,
+      "credit_id": "5256c8a219c2956ff6046e77",
+      "name": "Tim Van Patten",
+      "department": "Directing",
+      "job": "Director",
+      "profile_path": "/6b7l9YbkDHDOzOKUFNqBVaPjcgm.jpg"
+    }
+  ],
+  "episode_number": 1,
+  "guest_stars": [
+    {
+      "id": 117642,
+      "name": "Jason Momoa",
+      "credit_id": "5256c8a219c2956ff6046f40",
+      "character": "Khal Drogo",
+      "order": 0,
+      "profile_path": "/oath.jpg"
+    }
+  ],
+  "name": "Winter Is Coming",
+  "overview": "overview",
+  "id": 63056,
+  "production_code": "101",
+  "season_number": 1,
+  "still_path": "/path.jpg",
+  "vote_average": 7.11904761904762,
+  "vote_count": 21
+}

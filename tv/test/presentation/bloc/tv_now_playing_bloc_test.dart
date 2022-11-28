@@ -56,4 +56,21 @@ void main() {
       NowPlayingLoading();
     },
   );
+
+  blocTest<TvNowPlayingBloc, TvNowPlayingState>(
+    'should emit Loading state and then HasData state when data unsuccessfully fetched',
+    build: () {
+      when(nowPlayingTvs.execute())
+          .thenAnswer((_) async => const Left(SSLFailure('CERTIFICATE_VERIFY_FAILED')));
+      return tvNowPlayingBloc;
+    },
+    act: (bloc) => bloc.add(const OnFetchTvNowPlaying()),
+    expect: () => [
+      NowPlayingLoading(),
+      const NowPlayingError('CERTIFICATE_VERIFY_FAILED'),
+    ],
+    verify: (bloc) {
+      NowPlayingLoading();
+    },
+  );
 }

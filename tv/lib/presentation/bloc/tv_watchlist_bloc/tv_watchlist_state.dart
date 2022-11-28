@@ -31,15 +31,6 @@ class WatchlistHasData extends TvWatchlistState {
   List<Object> get props => [result];
 }
 
-class WatchlistSuccess extends TvWatchlistState {
-  final String message;
-
-  const WatchlistSuccess(this.message);
-
-  @override
-  List<Object> get props => [message];
-}
-
 // ignore: must_be_immutable
 class WatchlistState extends TvWatchlistState {
   bool isAddedToWatchlist = false;
