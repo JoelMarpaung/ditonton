@@ -109,6 +109,22 @@ void main() {
           equals(const Left(
               ConnectionFailure('Failed to connect to the network'))));
     });
+
+    test(
+        'should return connection failure when the device is not connected to internet',
+            () async {
+          // arrange
+          when(mockRemoteDataSource.getNowPlayingMovies())
+              .thenThrow(const TlsException('CERTIFICATE_VERIFY_FAILED'));
+          // act
+          final result = await repository.getNowPlayingMovies();
+          // assert
+          verify(mockRemoteDataSource.getNowPlayingMovies());
+          expect(
+              result,
+              equals(const Left(
+                  SSLFailure('CERTIFICATE_VERIFY_FAILED'))));
+        });
   });
 
   group('Popular Movies', () {
@@ -149,6 +165,19 @@ void main() {
       expect(result,
           const Left(ConnectionFailure('Failed to connect to the network')));
     });
+
+    test(
+        'should return connection failure when device is not connected to the internet',
+            () async {
+          // arrange
+          when(mockRemoteDataSource.getPopularMovies())
+              .thenThrow(const TlsException('CERTIFICATE_VERIFY_FAILED'));
+          // act
+          final result = await repository.getPopularMovies();
+          // assert
+          expect(result,
+              const Left(SSLFailure('CERTIFICATE_VERIFY_FAILED')));
+        });
   });
 
   group('Top Rated Movies', () {
@@ -188,6 +217,19 @@ void main() {
       expect(result,
           const Left(ConnectionFailure('Failed to connect to the network')));
     });
+
+    test(
+        'should return ConnectionFailure when device is not connected to the internet',
+            () async {
+          // arrange
+          when(mockRemoteDataSource.getTopRatedMovies())
+              .thenThrow(const TlsException('CERTIFICATE_VERIFY_FAILED'));
+          // act
+          final result = await repository.getTopRatedMovies();
+          // assert
+          expect(result,
+              const Left(SSLFailure('CERTIFICATE_VERIFY_FAILED')));
+        });
   });
 
   group('Get Movie Detail', () {
@@ -257,6 +299,22 @@ void main() {
           equals(const Left(
               ConnectionFailure('Failed to connect to the network'))));
     });
+
+    test(
+        'should return connection failure when the device is not connected to internet',
+            () async {
+          // arrange
+          when(mockRemoteDataSource.getMovieDetail(tId))
+              .thenThrow(const TlsException('CERTIFICATE_VERIFY_FAILED'));
+          // act
+          final result = await repository.getMovieDetail(tId);
+          // assert
+          verify(mockRemoteDataSource.getMovieDetail(tId));
+          expect(
+              result,
+              equals(const Left(
+                  SSLFailure('CERTIFICATE_VERIFY_FAILED'))));
+        });
   });
 
   group('Get Movie Recommendations', () {
@@ -305,6 +363,22 @@ void main() {
           equals(const Left(
               ConnectionFailure('Failed to connect to the network'))));
     });
+
+    test(
+        'should return connection failure when the device is not connected to the internet',
+            () async {
+          // arrange
+          when(mockRemoteDataSource.getMovieRecommendations(tId))
+              .thenThrow(const TlsException('CERTIFICATE_VERIFY_FAILED'));
+          // act
+          final result = await repository.getMovieRecommendations(tId);
+          // assert
+          verify(mockRemoteDataSource.getMovieRecommendations(tId));
+          expect(
+              result,
+              equals(const Left(
+                  SSLFailure('CERTIFICATE_VERIFY_FAILED'))));
+        });
   });
 
   group('Seach Movies', () {
@@ -346,6 +420,19 @@ void main() {
       expect(result,
           const Left(ConnectionFailure('Failed to connect to the network')));
     });
+
+    test(
+        'should return ConnectionFailure when device is not connected to the internet',
+            () async {
+          // arrange
+          when(mockRemoteDataSource.searchMovies(tQuery))
+              .thenThrow(const TlsException('CERTIFICATE_VERIFY_FAILED'));
+          // act
+          final result = await repository.searchMovies(tQuery);
+          // assert
+          expect(result,
+              const Left(SSLFailure('CERTIFICATE_VERIFY_FAILED')));
+        });
   });
 
   group('save watchlist', () {
