@@ -7,8 +7,6 @@ import '../models/tv_detail_model.dart';
 import '../models/tv_model.dart';
 import '../models/tv_response.dart';
 
-import 'dart:io';
-import 'package:flutter/services.dart';
 
 abstract class TvRemoteDataSource {
   Future<List<TvModel>> getNowPlayingTvs();
